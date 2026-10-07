@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Upcoming classes — Alex Coulombe Presents</title>
+<style>
+ :root{--bg:#0a0b0f;--paper:#f2f3f5;--teal:#2dd4bf;--amber:#fbbf24}
+ *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg)}
+ body{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--paper)}
+ #stage{position:absolute;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:radial-gradient(ellipse 830px 700px at 86% 98%,#17201e 0%,var(--bg) 70%)}
+ .kicker{position:absolute;left:128px;top:66px;margin:0;color:var(--teal);font-size:20px;font-weight:700;letter-spacing:.25em;opacity:0}
+ h1{position:absolute;left:122px;top:102px;margin:0;font-size:83px;letter-spacing:-.06em;font-weight:720;opacity:0;transform:translateY(28px)}
+ .season{position:absolute;right:128px;top:136px;color:#8e9c9e;font-size:20px;letter-spacing:.21em;opacity:0}
+ .headerline{position:absolute;left:128px;top:206px;width:1664px;height:1px;background:#ffffff46;transform:scaleX(0);transform-origin:left}
+ .columnheads{position:absolute;left:128px;top:225px;width:1664px;height:38px;display:grid;grid-template-columns:195px 1fr 278px;color:#73888a;font-size:16px;letter-spacing:.19em;font-weight:650;opacity:0}
+ .columnheads span:last-child{text-align:right}
+ .schedule{position:absolute;left:128px;top:275px;width:1664px}
+ .row{position:relative;height:107px;display:grid;grid-template-columns:195px 1fr 278px;align-items:center;border-top:1px solid #ffffff23;opacity:0;transform:translateY(26px)}
+ .row:last-child{border-bottom:1px solid #ffffff23}
+ .date{font-size:29px;letter-spacing:-.025em;font-weight:650;color:#b5c7c7}
+ .course{font-size:38px;line-height:1.13;letter-spacing:-.033em;font-weight:600;white-space:nowrap}
+ .teacher{text-align:right;font-size:27px;color:#a2afb2;letter-spacing:-.02em}
+ .row:after{content:"";position:absolute;bottom:-1px;left:0;width:0;height:1px;background:#2dd4bf99}
+ .row.ai .date{color:var(--amber)}.row.ai .course{font-size:34px}
+ .ai-bracket{position:absolute;left:106px;top:596px;width:0;height:214px;border-left:2px solid var(--amber);opacity:0;transform:scaleY(0);transform-origin:top}
+ .ai-bracket:before,.ai-bracket:after{content:"";position:absolute;left:0;width:15px;height:2px;background:var(--amber)}
+ .ai-bracket:before{top:0}.ai-bracket:after{bottom:0}
+ .series{position:absolute;left:104px;top:568px;font-size:13px;letter-spacing:.16em;color:var(--amber);font-weight:700;opacity:0}
+ .footerline{position:absolute;left:128px;top:960px;width:1664px;height:1px;background:#ffffff3b;transform:scaleX(0);transform-origin:left}
+ .footer{position:absolute;left:128px;top:984px;width:1664px;display:flex;justify-content:space-between;align-items:center;opacity:0;transform:translateY(13px)}
+ .footer .url{font-size:29px;letter-spacing:.005em;color:var(--teal);font-weight:620}
+ .footer .mark{font-size:18px;letter-spacing:.2em;color:#879497}
+ #stage.play .kicker{animation:fade .55s .16s both}#stage.play h1{animation:rise .8s .27s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .season{animation:fade .75s .65s both}#stage.play .headerline{animation:draw .9s .76s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .columnheads{animation:fade .6s .97s both}
+ #stage.play .row:nth-child(1){animation:rowIn .66s 1.38s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .row:nth-child(2){animation:rowIn .66s 2.12s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .row:nth-child(3){animation:rowIn .66s 2.86s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .row:nth-child(4){animation:rowIn .66s 3.6s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .row:nth-child(5){animation:rowIn .66s 4.34s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .row:nth-child(6){animation:rowIn .66s 5.08s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .row:after{animation:lineFlash 1s 5.82s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .ai-bracket{animation:bracket .8s 5.28s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .series{animation:fade .7s 5.9s both}
+ #stage.play .footerline{animation:draw .95s 6.55s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .footer{animation:rise .76s 7.05s cubic-bezier(.16,1,.3,1) both}
+ @keyframes fade{to{opacity:1}}@keyframes rise{to{opacity:1;transform:none}}@keyframes draw{to{transform:scaleX(1)}}
+ @keyframes rowIn{to{opacity:1;transform:none}}@keyframes lineFlash{0%{width:0;opacity:0}55%{width:100%;opacity:.7}100%{width:100%;opacity:0}}
+ @keyframes bracket{to{opacity:1;transform:scaleY(1)}}
+</style>
+</head>
+<body>
+<main id="stage" aria-label="Upcoming class schedule">
+ <p class="kicker">ALEX COULOMBE PRESENTS</p><h1>Upcoming classes</h1><div class="season">OCTOBER — NOVEMBER 2026</div>
+ <div class="headerline"></div><div class="columnheads"><span>DATE</span><span>CLASS</span><span>INSTRUCTOR</span></div>
+ <div class="schedule">
+  <div class="row"><div class="date">Oct 14</div><div class="course">MetaHuman Wardrobes: Infinite Possibilities</div><div class="teacher">Franco Vilanova</div></div>
+  <div class="row"><div class="date">Oct 21</div><div class="course">Deep Dive with Lumen for UE 5.8</div><div class="teacher">Sean Spitzer</div></div>
+  <div class="row"><div class="date">Oct 28</div><div class="course">VR Cinematics for UE 5.8</div><div class="teacher">Alex Coulombe</div></div>
+  <div class="row ai"><div class="date">Nov 4</div><div class="course">Creative AI Workflow Masterclass, Part 1: Set Up From Scratch</div><div class="teacher">Alex Coulombe</div></div>
+  <div class="row ai"><div class="date">Nov 11</div><div class="course">Creative AI Workflow Masterclass, Part 2: Let It Run</div><div class="teacher">Alex Coulombe</div></div>
+  <div class="row"><div class="date">Nov 18</div><div class="course">Gaussian Splatting for VR in UE 5.8</div><div class="teacher">Alex Coulombe</div></div>
+ </div>
+ <div class="ai-bracket"></div><div class="series">TWO-PART SERIES</div>
+ <div class="footerline"></div><div class="footer"><span class="url">alexcoulombepresents.com/classes</span><span class="mark">SIX SESSIONS / FALL 2026</span></div>
+</main>
+<script>
+ const stage=document.getElementById('stage');
+ function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`}
+ addEventListener('resize',fit);fit();
+ window.__restart=()=>{stage.classList.remove('play');void stage.offsetWidth;stage.classList.add('play')};window.__restart();
+</script>
+</body>
+</html>

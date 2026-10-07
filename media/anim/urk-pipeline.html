@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>URK Pipeline</title>
+<style>
+:root{--ground:#0a0b0f;--ink:#f2f3f5;--teal:#2dd4bf;--amber:#fbbf24;--muted:#8b8f99}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--ground);overflow:hidden}
+#fit{position:fixed;inset:0;display:grid;place-items:center}
+#stage{width:1920px;height:1080px;position:relative;transform-origin:center center;background:var(--ground);
+  overflow:hidden;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+svg{position:absolute;inset:0;width:1920px;height:1080px;overflow:visible}
+.kick{font-size:21px;letter-spacing:.4em;fill:var(--teal);font-weight:600}
+.h1{font-size:60px;font-weight:700;fill:var(--ink);letter-spacing:-.02em}
+.nodeName{font-size:30px;font-weight:600;fill:var(--ink)}
+.nodeSub{font-size:19px;fill:var(--muted);font-weight:400}
+.edgeLbl{font-size:17px;fill:var(--muted);letter-spacing:.06em}
+.cap{font-size:27px;fill:var(--ink);font-weight:400}
+.capDim{fill:var(--muted)}
+.pktLbl{font-size:17px;fill:#06221e;font-weight:700;letter-spacing:.02em}
+.badge{font-size:17px;font-weight:700;letter-spacing:.1em}
+</style></head>
+<body><div id="fit"><div id="stage">
+<svg id="svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="wire" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity=".25"/><stop offset="1" stop-color="#2dd4bf" stop-opacity=".7"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <g id="head" opacity="0">
+    <text class="kick" x="150" y="150">THE LIVE LINK</text>
+    <text class="h1" x="150" y="226">Unreal to the headset, without an export step</text>
+  </g>
+
+  <!-- edges are drawn before nodes so nodes sit on top -->
+  <g id="edges">
+    <path class="edge" id="e1" d="M430 470 H 610" stroke="url(#wire)" stroke-width="3" fill="none"/>
+    <path class="edge" id="e2" d="M870 470 H 1050" stroke="url(#wire)" stroke-width="3" fill="none"/>
+    <path class="edge" id="e3" d="M1310 470 H 1490" stroke="url(#wire)" stroke-width="3" fill="none"/>
+    <!-- the live tap: RealityKit down to the simulator -->
+    <path class="edge" id="e4" d="M1180 530 V 648 Q 1180 690 1138 690 H 1010" stroke="#2dd4bf" stroke-opacity=".75" stroke-width="3" fill="none"/>
+  </g>
+
+  <g id="nodes"></g>
+
+  <!-- the travelling payload -->
+  <g id="pktG" opacity="0">
+    <rect id="pktBox" x="-32" y="-8" width="64" height="16" rx="8" fill="#2dd4bf" filter="url(#glow)"/>
+  </g>
+  <text id="pktTxt" class="edgeLbl" x="520" y="578" text-anchor="middle" fill="#2dd4bf" opacity="0">USD + manifest.json</text>
+
+  <!-- the edit badge that fires the second pass -->
+  <g id="editBadge" opacity="0">
+    <rect x="196" y="352" width="208" height="38" rx="19" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text class="badge" x="300" y="377" text-anchor="middle" fill="#fbbf24">YOU EDIT THE SCENE</text>
+  </g>
+
+  <g id="cap" opacity="0">
+    <text class="cap" x="150" y="872">The simulator is the <tspan fill="#2dd4bf">live</tspan> surface &mdash; it repaints while the scene is still open in Unreal.</text>
+    <text class="cap capDim" x="150" y="916">The headset runs a packaged build of the same scene.</text>
+  </g>
+</svg>
+</div></div>
+<script>
+(function(){
+  var S=document.getElementById('stage'), SVG=document.getElementById('svg');
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);S.style.transform='scale('+s+')';}
+  addEventListener('resize',fit,{passive:true});fit();
+
+  var NS='http://www.w3.org/2000/svg';
+  // x = left edge of each 300-wide node box; all share y 410..530
+  var NODES=[
+    {x:150, name:'Unreal Engine 5.8', sub:'your scene, open and editable'},
+    {x:590, name:'URK Live Link',     sub:'geometry, lights, cameras'},
+    {x:1030,name:'RealityKit',        sub:'native Apple rendering'},
+    {x:1470,name:'Apple Vision Pro',  sub:'packaged build'}
+  ];
+  var SIM={x:710,y:650,w:300,h:80,name:'visionOS Simulator',sub:'live preview'};
+
+  var g=document.getElementById('nodes');
+  function mk(n,i){
+    var gg=document.createElementNS(NS,'g');
+    gg.setAttribute('class','node'); gg.setAttribute('data-i',i);
+    gg.setAttribute('transform','translate('+(n.x+150)+',470)');
+    var r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',-130);r.setAttribute('y',-60);r.setAttribute('width',260);r.setAttribute('height',120);
+    r.setAttribute('rx',16);r.setAttribute('fill','#12141b');
+    r.setAttribute('stroke','rgba(242,243,245,.16)');r.setAttribute('stroke-width','1.5');
+    var t1=document.createElementNS(NS,'text');
+    t1.setAttribute('class','nodeName');t1.setAttribute('text-anchor','middle');t1.setAttribute('y',-4);
+    t1.textContent=n.name;
+    var t2=document.createElementNS(NS,'text');
+    t2.setAttribute('class','nodeSub');t2.setAttribute('text-anchor','middle');t2.setAttribute('y',28);
+    t2.textContent=n.sub;
+    gg.appendChild(r);gg.appendChild(t1);gg.appendChild(t2);
+    gg.__rect=r;
+    return gg;
+  }
+  var nodeEls=NODES.map(function(n,i){var e=mk(n,i);g.appendChild(e);return e;});
+  // the simulator node, visually distinct: teal border, it is the live one
+  var simG=document.createElementNS(NS,'g');
+  simG.setAttribute('transform','translate('+(SIM.x+SIM.w/2)+','+(SIM.y+SIM.h/2)+')');
+  (function(){
+    var r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',-150);r.setAttribute('y',-40);r.setAttribute('width',300);r.setAttribute('height',80);
+    r.setAttribute('rx',14);r.setAttribute('fill','#0e1a19');
+    r.setAttribute('stroke','#2dd4bf');r.setAttribute('stroke-opacity','.8');r.setAttribute('stroke-width','1.5');
+    var t1=document.createElementNS(NS,'text');
+    t1.setAttribute('class','nodeName');t1.setAttribute('text-anchor','middle');t1.setAttribute('y',-2);
+    t1.setAttribute('style','font-size:26px');t1.textContent=SIM.name;
+    var t2=document.createElementNS(NS,'text');
+    t2.setAttribute('class','nodeSub');t2.setAttribute('text-anchor','middle');t2.setAttribute('y',24);
+    t2.setAttribute('fill','#2dd4bf');t2.textContent=SIM.sub;
+    simG.appendChild(r);simG.appendChild(t1);simG.appendChild(t2);simG.__rect=r;
+  })();
+  g.appendChild(simG);
+
+  // edge labels
+  var lbls=[['packaged build',1620,430]];
+  lbls.forEach(function(l){
+    var t=document.createElementNS(NS,'text');
+    t.setAttribute('class','edgeLbl');t.setAttribute('x',1400);t.setAttribute('y',443);
+    t.setAttribute('text-anchor','middle');t.textContent=l[0];t.setAttribute('opacity','0');
+    t.id='lblPack';g.appendChild(t);
+  });
+  var tl=document.createElementNS(NS,'text');
+  tl.setAttribute('class','edgeLbl');tl.setAttribute('x',1215);tl.setAttribute('y',610);
+  tl.setAttribute('fill','#2dd4bf');tl.textContent='live';tl.setAttribute('opacity','0');tl.id='lblLive';
+  g.appendChild(tl);
+
+  var edges=['e1','e2','e3','e4'].map(function(id){return document.getElementById(id);});
+  edges.forEach(function(p){var L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;});
+
+  // one continuous route for the payload: node1 -> node4, straight through the row
+  var route=document.createElementNS(NS,'path');
+  route.setAttribute('d','M300 470 H 1620'); route.setAttribute('fill','none'); route.setAttribute('stroke','none');
+  SVG.appendChild(route);
+  // and the live route: node1 -> RealityKit -> simulator
+  var routeLive=document.createElementNS(NS,'path');
+  routeLive.setAttribute('d','M300 470 H 1180 V 648 Q 1180 690 1138 690 H 860');
+  routeLive.setAttribute('fill','none');routeLive.setAttribute('stroke','none');
+  SVG.appendChild(routeLive);
+
+  var pktG=document.getElementById('pktG'), pktTxt=document.getElementById('pktTxt'), pktBox=document.getElementById('pktBox');
+  var head=document.getElementById('head'), cap=document.getElementById('cap'), badge=document.getElementById('editBadge');
+  var rafs=[];
+  var anims=[], raf=null;
+
+  function A(el,kf,opt){var a=el.animate(kf,Object.assign({fill:'forwards',easing:'cubic-bezier(.16,1,.3,1)'},opt));anims.push(a);return a;}
+
+  // move the payload along `path` from t=start for `dur` ms, then fade it out
+  function travel(path,start,dur){
+    var L=path.getTotalLength();
+    anims.push(pktG.animate([{opacity:0},{opacity:1}],{duration:160,delay:start,fill:'forwards'}));
+    anims.push(pktG.animate([{opacity:1},{opacity:0}],{duration:200,delay:start+dur-110,fill:'forwards'}));
+    var t0=performance.now()+start, id;
+    function tick(now){
+      var k=(now-t0)/dur;
+      if(k>=0&&k<=1){var p=path.getPointAtLength(L*k);pktG.setAttribute('transform','translate('+p.x+','+p.y+')');}
+      if(k<1.1){id=requestAnimationFrame(tick);rafs.push(id);}
+    }
+    id=requestAnimationFrame(tick);rafs.push(id);
+  }
+  // a node lights up the moment data lands on it
+  function land(el,at){
+    A(el.__rect,[{filter:'none'},{filter:'drop-shadow(0 0 14px rgba(45,212,191,.8))'},{filter:'none'}],
+      {duration:800,delay:at,easing:'ease-out'});
+  }
+
+  function run(){
+    anims.forEach(function(a){try{a.cancel();}catch(e){}}); anims=[];
+    rafs.forEach(cancelAnimationFrame);rafs=[];if(window.__lblT)clearTimeout(window.__lblT);
+    [head,cap,badge,pktG,pktTxt].forEach(function(e){e.style.opacity='0';});pktTxt.textContent='USD + manifest.json';
+    document.getElementById('lblPack').style.opacity='0';
+    document.getElementById('lblLive').style.opacity='0';
+    edges.forEach(function(p){var L=p.getTotalLength();p.style.strokeDashoffset=L;});
+    nodeEls.concat([simG]).forEach(function(e){e.style.opacity='0';e.style.transform=e.getAttribute('transform')+' ';});
+
+    A(head,[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:900,delay:120});
+
+    // nodes arrive left to right
+    nodeEls.forEach(function(e,i){
+      A(e,[{opacity:0},{opacity:1}],{duration:620,delay:620+i*210});
+      A(e.__rect,[{transform:'scale(.9)'},{transform:'scale(1)'}],{duration:760,delay:620+i*210});
+    });
+    // wires draw between them
+    [0,1,2].forEach(function(i){
+      A(edges[i],[{strokeDashoffset:edges[i].getTotalLength()},{strokeDashoffset:0}],{duration:560,delay:900+i*210});
+    });
+    // the live tap, then the simulator
+    A(edges[3],[{strokeDashoffset:edges[3].getTotalLength()},{strokeDashoffset:0}],{duration:760,delay:1950});
+    A(simG,[{opacity:0},{opacity:1}],{duration:620,delay:2150});
+    A(document.getElementById('lblLive'),[{opacity:0},{opacity:1}],{duration:500,delay:2500});
+    A(document.getElementById('lblPack'),[{opacity:0},{opacity:1}],{duration:500,delay:2500});
+
+    A(pktTxt,[{opacity:0},{opacity:1}],{duration:500,delay:2700});
+
+    // pass 1 — the scene leaves Unreal and lands in the simulator, one hop at a time
+    travel(edges[0],3000,620); land(nodeEls[1],3560);
+    travel(edges[1],3700,620); land(nodeEls[2],4260);
+    travel(edges[3],4400,900);
+    A(simG.__rect,[{filter:'none'},{filter:'drop-shadow(0 0 18px rgba(45,212,191,.9))'},{filter:'none'}],
+      {duration:1100,delay:5250,easing:'ease-out'});
+
+    // you edit the scene -> the same path runs again, faster, carrying only the delta.
+    // this round trip is the entire argument of the diagram.
+    A(badge,[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:520,delay:6100});
+    A(nodeEls[0].__rect,[{stroke:'rgba(242,243,245,.16)'},{stroke:'#fbbf24'},{stroke:'rgba(242,243,245,.16)'}],
+      {duration:1500,delay:6100,easing:'ease-in-out'});
+    window.__lblT=setTimeout(function(){pktTxt.textContent='changed transforms only';},6700);
+    travel(edges[0],6900,380); land(nodeEls[1],7240);
+    travel(edges[1],7320,380); land(nodeEls[2],7660);
+    travel(edges[3],7740,560);
+    A(simG.__rect,[{filter:'none'},{filter:'drop-shadow(0 0 18px rgba(45,212,191,.9))'},{filter:'none'}],
+      {duration:1000,delay:8300,easing:'ease-out'});
+
+    A(cap,[{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'translateY(0)'}],{duration:900,delay:8700});
+  }
+  window.__restart=run;
+  run();
+})();
+</script></body></html>

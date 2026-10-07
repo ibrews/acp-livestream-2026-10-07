@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cold Open</title>
+<style>
+  :root {
+    --bg: #0a0b0f;
+    --text: #f2f3f5;
+    --teal: #2dd4bf;
+    --amber: #fbbf24;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background-color: var(--bg);
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+  }
+  #container {
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #stage {
+    width: 1920px; height: 1080px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .glow {
+    position: absolute;
+    width: 1200px; height: 1200px;
+    background: radial-gradient(circle, rgba(45,212,191,0.08) 0%, rgba(10,11,15,0) 60%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0;
+    animation: fadeIn 3s ease 0.2s forwards;
+  }
+  .content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1400px;
+  }
+  .kicker {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  }
+  .title {
+    font-size: 96px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 60px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 24px;
+    row-gap: 12px;
+  }
+  .title .word {
+    overflow: hidden;
+    display: inline-flex;
+    padding-bottom: 12px;
+    margin-bottom: -12px;
+  }
+  .title .word-inner {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  .subtitle {
+    font-size: 42px;
+    font-weight: 500;
+    color: var(--amber);
+    opacity: 0;
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes wordReveal {
+    0% { transform: translateY(110%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <div id="stage">
+      <div class="glow"></div>
+      <div class="content">
+        <div class="kicker">ALEX COULOMBE PRESENTS</div>
+        <h1 class="title" id="title-el">Live AMA: Meta's VR Glasses, the Member Toolkit, and What's Next</h1>
+        <div class="subtitle">October 7, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function scaleStage() {
+      const stage = document.getElementById('stage');
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', scaleStage);
+    scaleStage();
+
+    const titleEl = document.getElementById('title-el');
+    const originalText = titleEl.innerText;
+
+    function setupAnimations() {
+      titleEl.innerHTML = '';
+      const words = originalText.split(' ');
+      
+      let delay = 1.0;
+      
+      words.forEach((word) => {
+        const wordWrap = document.createElement('span');
+        wordWrap.className = 'word';
+        const wordInner = document.createElement('span');
+        wordInner.className = 'word-inner';
+        wordInner.innerText = word;
+        
+        wordInner.style.animation = `wordReveal 1s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s forwards`;
+        wordWrap.appendChild(wordInner);
+        titleEl.appendChild(wordWrap);
+        
+        delay += 0.08;
+      });
+    }
+
+    setupAnimations();
+
+    window.__restart = function() {
+      // Re-trigger simple animations
+      const animatedEls = document.querySelectorAll('.kicker, .subtitle, .glow');
+      animatedEls.forEach(el => {
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.style.animation = '';
+      });
+      // Re-setup title
+      setupAnimations();
+    };
+  </script>
+</body>
+</html>

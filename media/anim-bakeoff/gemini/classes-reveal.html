@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Classes Reveal</title>
+<style>
+  :root {
+    --bg: #0a0b0f;
+    --text: #f2f3f5;
+    --teal: #2dd4bf;
+    --amber: #fbbf24;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background-color: var(--bg);
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+  }
+  #container {
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #stage {
+    width: 1920px; height: 1080px;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0;
+    animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    width: 1400px;
+    text-align: left;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 1400px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 200px 1fr 340px;
+    align-items: center;
+    padding: 28px 40px;
+    background: rgba(242, 243, 245, 0.05);
+    border-radius: 12px;
+    border-left: 6px solid var(--teal);
+    opacity: 0;
+    transform: translateX(40px);
+    animation: slideInRow 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ai-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .ai-group .row {
+    border-radius: 0;
+    border-left-color: var(--amber);
+  }
+
+  .date {
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.05em;
+  }
+  .ai-group .date {
+    color: var(--amber);
+  }
+  
+  .class-title {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+  }
+  
+  .instructor {
+    color: rgba(242, 243, 245, 0.5);
+    font-weight: 500;
+    font-size: 28px;
+    text-align: right;
+  }
+
+  .footer {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-top: 60px;
+    opacity: 0;
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    letter-spacing: 0.02em;
+  }
+
+  /* Delays */
+  .r1 { animation-delay: 1.0s; }
+  .r2 { animation-delay: 2.2s; }
+  .r3 { animation-delay: 3.4s; }
+  .r4 { animation-delay: 4.8s; }
+  .r5 { animation-delay: 5.2s; }
+  .r6 { animation-delay: 6.6s; }
+  .footer { animation-delay: 8.0s; }
+
+  @keyframes slideIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideInRow {
+    0% { opacity: 0; transform: translateX(40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+</style>
+</head>
+<body>
+  <div id="container">
+    <div id="stage">
+      <div class="header">Class Schedule</div>
+      
+      <div class="list">
+        <div class="row r1">
+          <div class="date">Oct 14</div>
+          <div class="class-title">MetaHuman Wardrobes: Infinite Possibilities</div>
+          <div class="instructor">Franco Vilanova</div>
+        </div>
+        
+        <div class="row r2">
+          <div class="date">Oct 21</div>
+          <div class="class-title">Deep Dive with Lumen for UE 5.8</div>
+          <div class="instructor">Sean Spitzer</div>
+        </div>
+        
+        <div class="row r3">
+          <div class="date">Oct 28</div>
+          <div class="class-title">VR Cinematics for UE 5.8</div>
+          <div class="instructor">Alex Coulombe</div>
+        </div>
+        
+        <div class="ai-group">
+          <div class="row r4">
+            <div class="date">Nov 4</div>
+            <div class="class-title">Creative AI Workflow Masterclass, Part 1: Set Up From Scratch</div>
+            <div class="instructor">Alex Coulombe</div>
+          </div>
+          <div class="row r5">
+            <div class="date">Nov 11</div>
+            <div class="class-title">Creative AI Workflow Masterclass, Part 2: Let It Run</div>
+            <div class="instructor">Alex Coulombe</div>
+          </div>
+        </div>
+        
+        <div class="row r6">
+          <div class="date">Nov 18</div>
+          <div class="class-title">Gaussian Splatting for VR in UE 5.8</div>
+          <div class="instructor">Alex Coulombe</div>
+        </div>
+      </div>
+
+      <div class="footer">alexcoulombepresents.com/classes</div>
+    </div>
+  </div>
+
+  <script>
+    function scaleStage() {
+      const stage = document.getElementById('stage');
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', scaleStage);
+    scaleStage();
+
+    window.__restart = function() {
+      const stage = document.getElementById('stage');
+      const clone = stage.cloneNode(true);
+      stage.parentNode.replaceChild(clone, stage);
+    };
+  </script>
+</body>
+</html>

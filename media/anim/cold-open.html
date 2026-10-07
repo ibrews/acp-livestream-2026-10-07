@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Cold Open</title>
+<style>
+:root{--ground:#0a0b0f;--ink:#f2f3f5;--teal:#2dd4bf;--amber:#fbbf24;--muted:#8b8f99}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--ground);overflow:hidden}
+#fit{position:fixed;inset:0;display:grid;place-items:center}
+#stage{width:1920px;height:1080px;position:relative;transform-origin:center center;
+  background:var(--ground);overflow:hidden;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+
+/* ── ground: a slow teal bloom from below, plus a faint ruled grid ── */
+#bloom{position:absolute;left:50%;bottom:-340px;width:1700px;height:760px;transform:translateX(-50%);
+  background:radial-gradient(ellipse at 50% 100%,rgba(45,212,191,.19),rgba(45,212,191,.05) 42%,transparent 70%);
+  opacity:0;animation:bloom 2.6s .15s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes bloom{to{opacity:1}}
+#bloom{animation:bloom 2.6s .15s cubic-bezier(.22,1,.36,1) forwards,drift 19s 2.8s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-52%) scale(1.07)}}
+#grid{position:absolute;inset:0;opacity:0;animation:gridin 3.2s .5s ease-out forwards;
+  background-image:linear-gradient(rgba(242,243,245,.055) 1px,transparent 1px);
+  background-size:100% 72px;mask-image:linear-gradient(to bottom,transparent,#000 38%,#000 70%,transparent)}
+@keyframes gridin{to{opacity:1}}
+
+/* ── the horizon rule: draws out from the center ── */
+#rule{position:absolute;left:50%;top:872px;width:1180px;height:1px;transform:translateX(-50%) scaleX(0);
+  transform-origin:center;background:linear-gradient(to right,transparent,rgba(45,212,191,.6) 18%,rgba(45,212,191,.6) 82%,transparent);
+  animation:rule 1.15s .62s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes rule{to{transform:translateX(-50%) scaleX(1)}}
+/* a spark that rides the rule once as it draws */
+#spark{position:absolute;left:50%;top:870px;width:120px;height:5px;transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(45,212,191,.95),transparent 70%);
+  opacity:0;animation:spark 1.15s .62s cubic-bezier(.16,1,.3,1) forwards;filter:blur(1px)}
+@keyframes spark{0%{opacity:0;transform:translateX(-50%) scaleX(.3)}
+  22%{opacity:1}100%{opacity:0;transform:translateX(-50%) scaleX(9)}}
+
+#spark2{position:absolute;left:50%;top:870px;width:120px;height:5px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(45,212,191,.7),transparent 70%);opacity:0;filter:blur(1px)}
+.run #spark2{animation:spark 2.4s 4.2s cubic-bezier(.33,0,.2,1) infinite}
+#copy{position:absolute;left:370px;top:0;width:1180px;height:1080px;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+
+/* ── mask-reveal primitive: clip the line, lift the text through it ── */
+.m{overflow:hidden;display:block}
+.m>span{display:block;transform:translateY(112%);will-change:transform}
+.run .m>span{animation:lift 1.08s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes lift{to{transform:translateY(0)}}
+
+#kick{display:flex;align-items:center;gap:18px;margin-bottom:34px;opacity:0}
+.run #kick{animation:fade .8s .3s ease-out forwards}
+@keyframes fade{to{opacity:1}}
+#kick .lbl{font-size:23px;letter-spacing:.42em;color:var(--teal);font-weight:600}
+#live{display:flex;align-items:center;gap:9px;padding:6px 13px 6px 10px;border:1px solid rgba(251,191,36,.42);
+  border-radius:100px;font-size:16px;letter-spacing:.22em;color:var(--amber);font-weight:700}
+#live i{width:8px;height:8px;border-radius:50%;background:var(--amber);animation:beat 1.9s 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(251,191,36,.55)}
+  50%{opacity:.5;box-shadow:0 0 0 7px rgba(251,191,36,0)}}
+
+h1{font-size:92px;line-height:1.1;font-weight:700;color:var(--ink);letter-spacing:-.022em}
+h1 .m{padding-bottom:.06em;margin-bottom:-.06em}
+h1 em{font-style:normal;color:var(--teal)}
+.run h1 .m:nth-of-type(1)>span{animation-delay:.72s}
+.run h1 .m:nth-of-type(2)>span{animation-delay:.84s}
+.run h1 .m:nth-of-type(3)>span{animation-delay:.96s}
+
+#sub{margin-top:44px;display:flex;align-items:baseline;gap:22px}
+#sub>*{opacity:0;transform:translateY(16px)}
+.run #sub>*{animation:subin .95s cubic-bezier(.16,1,.3,1) forwards}
+.run #sub>*:nth-child(1){animation-delay:1.55s}
+.run #sub>*:nth-child(2){animation-delay:2.0s}
+.run #sub>*:nth-child(3){animation-delay:2.15s}
+@keyframes subin{to{opacity:1;transform:translateY(0)}}
+#sub .date{font-size:30px;color:var(--ink);font-weight:500;letter-spacing:.01em}
+#sub .dot{width:5px;height:5px;border-radius:50%;background:var(--muted)}
+#sub .who{font-size:30px;color:var(--muted);font-weight:400}
+</style></head>
+<body><div id="fit"><div id="stage">
+  <div id="bloom"></div><div id="grid"></div>
+  <div id="rule"></div><div id="spark"></div><div id="spark2"></div>
+  <div id="copy">
+    <div id="kick"><span class="lbl">ALEX COULOMBE PRESENTS</span><span id="live"><i></i>LIVE</span></div>
+    <h1>
+      <span class="m"><span>Live AMA: Meta&rsquo;s VR Glasses,</span></span>
+      <span class="m"><span>the Member Toolkit,</span></span>
+      <span class="m"><span>and <em>What&rsquo;s Next</em></span></span>
+    </h1>
+    <div id="sub"><span class="date">October 7, 2026</span><span class="dot"></span><span class="who">Unreal Engine &middot; XR &middot; Apple Vision Pro</span></div>
+  </div>
+</div></div>
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='scale('+s+')';}
+  addEventListener('resize',fit,{passive:true});fit();
+  function run(){
+    stage.classList.remove('run');
+    // force a style flush so re-adding the class restarts every animation
+    void stage.offsetWidth;
+    stage.classList.add('run');
+  }
+  window.__restart=run;
+  run();
+})();
+</script></body></html>

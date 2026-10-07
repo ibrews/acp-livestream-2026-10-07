@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Classes Reveal</title>
+<style>
+:root{--ground:#0a0b0f;--ink:#f2f3f5;--teal:#2dd4bf;--amber:#fbbf24;--muted:#8b8f99}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--ground);overflow:hidden}
+#fit{position:fixed;inset:0;display:grid;place-items:center}
+#stage{width:1920px;height:1080px;position:relative;transform-origin:center center;background:var(--ground);
+  overflow:hidden;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink)}
+#glowbg{position:absolute;left:-160px;top:120px;width:1000px;height:900px;
+  background:radial-gradient(circle at 30% 40%,rgba(45,212,191,.11),transparent 62%);
+  opacity:0;animation:gin 2.4s .2s ease-out forwards}
+@keyframes gin{to{opacity:1}}
+
+header{position:absolute;left:150px;top:118px;opacity:0}
+.run header{animation:hin .95s .1s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes hin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.kick{font-size:21px;letter-spacing:.4em;color:var(--teal);font-weight:600;display:block;margin-bottom:16px}
+h1{font-size:62px;font-weight:700;letter-spacing:-.02em}
+
+#list{position:absolute;left:150px;top:300px;width:1620px}
+.row{position:relative;display:flex;align-items:baseline;height:88px;opacity:0;transform:translateX(-26px)}
+.run .row{animation:rin .85s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes rin{to{opacity:1;transform:translateX(0)}}
+.row.pair .d{color:var(--amber)}
+.row .d{flex:0 0 190px;font-size:27px;font-weight:700;color:var(--teal);letter-spacing:.03em;
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.row .t{flex:1;font-size:35px;font-weight:500;letter-spacing:-.012em;padding-right:40px}
+.row .w{flex:0 0 250px;text-align:right;font-size:23px;color:var(--muted)}
+/* the hairline under each row draws out as the row lands */
+.row::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(242,243,245,.11);
+  transform:scaleX(0);transform-origin:left}
+.run .row::after{animation:line .9s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes line{to{transform:scaleX(1)}}
+
+/* the two-part masterclass reads as one thing */
+#brace{position:absolute;left:-40px;top:264px;width:20px;height:176px;opacity:0;
+  border:2px solid rgba(251,191,36,.75);border-right:none;border-radius:9px 0 0 9px}
+.run #brace{animation:bin .8s 5.3s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes bin{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+.run 
+footer{position:absolute;left:150px;top:920px;display:flex;align-items:center;gap:20px;opacity:0}
+.run footer{animation:hin .9s 6.1s cubic-bezier(.16,1,.3,1) forwards}
+footer .u{font-size:30px;color:var(--ink);font-weight:500}
+footer .b{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+footer .n{font-size:24px;color:var(--muted)}
+</style></head>
+<body><div id="fit"><div id="stage">
+  <div id="glowbg"></div>
+  <header><span class="kick">COMING UP</span><h1>The next six classes</h1></header>
+  <div id="list">
+    <div id="brace"></div>
+  </div>
+  <footer><span class="u">alexcoulombepresents.com/classes</span><span class="b"></span><span class="n">Wednesdays, live</span></footer>
+</div></div>
+<script>
+(function(){
+  var S=document.getElementById('stage');
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);S.style.transform='scale('+s+')';}
+  addEventListener('resize',fit,{passive:true});fit();
+
+  var CLASSES=[
+    ['Oct 14','MetaHuman Wardrobes: Infinite Possibilities','Franco Vilanova'],
+    ['Oct 21','Deep Dive with Lumen for UE 5.8','Sean Spitzer'],
+    ['Oct 28','VR Cinematics for UE 5.8','Alex Coulombe'],
+    ['Nov 4','Creative AI Workflow Masterclass, Part 1: Set Up From Scratch','Alex Coulombe'],
+    ['Nov 11','Creative AI Workflow Masterclass, Part 2: Let It Run','Alex Coulombe'],
+    ['Nov 18','Gaussian Splatting for VR in UE 5.8','Alex Coulombe']
+  ];
+  var list=document.getElementById('list'), brace=document.getElementById('brace');
+  CLASSES.forEach(function(c,i){
+    var r=document.createElement('div'); r.className='row';
+    r.style.animationDelay=(0.85+i*0.55)+'s';
+    var d=document.createElement('span'); d.className='d'; d.textContent=c[0];
+    var t=document.createElement('span'); t.className='t'; t.textContent=c[1];
+    var w=document.createElement('span'); w.className='w'; w.textContent=c[2];
+    if(i===3||i===4) r.classList.add('pair');
+    r.appendChild(d);r.appendChild(t);r.appendChild(w);
+    // the hairline follows its own row
+    r.style.setProperty('--d',(0.85+i*0.55)+'s');
+    list.appendChild(r);
+  });
+  // give each row's underline the same delay as the row itself
+  var sheet=document.styleSheets[0];
+  Array.prototype.forEach.call(list.querySelectorAll('.row'),function(r,i){
+    r.style.animationDelay=(0.85+i*0.55)+'s';
+  });
+  var st=document.createElement('style');
+  st.textContent=CLASSES.map(function(_,i){
+    return '.run .row:nth-of-type('+(i+1)+')::after{animation-delay:'+(0.95+i*0.55)+'s}';
+  }).join('\n');
+  document.head.appendChild(st);
+
+  function run(){ S.classList.remove('run'); void S.offsetWidth; S.classList.add('run'); }
+  window.__restart=run; run();
+})();
+</script></body></html>

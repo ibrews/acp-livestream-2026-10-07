@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>URK Pipeline</title>
+<style>
+  :root {
+    --bg: #0a0b0f;
+    --text: #f2f3f5;
+    --teal: #2dd4bf;
+    --amber: #fbbf24;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background-color: var(--bg);
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+  }
+  #container {
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #stage {
+    width: 1920px; height: 1080px;
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  .node {
+    border: 2px solid var(--teal);
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 24px;
+    width: 240px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    position: absolute;
+    top: 540px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: var(--text);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    opacity: 0;
+  }
+  .node-ue { left: 288px; animation: nodeAnimUE 10s linear forwards; }
+  .node-urk { left: 768px; animation: nodeAnimURK 10s linear forwards; }
+  .node-rk { left: 1248px; animation: nodeAnimRK 10s linear forwards; }
+  .node-avp { left: 1728px; border-color: var(--text); animation: nodeAnimAVP 10s linear forwards; }
+  .node-sim { left: 1248px; top: 800px; border-color: var(--teal); color: var(--teal); width: 220px; font-size: 20px; animation: nodeAnimSim 10s linear forwards; }
+
+  svg { position: absolute; top: 0; left: 0; z-index: 1; }
+  
+  .flow-line {
+    opacity: 0;
+    animation: flowLineDash 1s linear infinite, liveLineAnim 10s linear forwards;
+  }
+  .build-line {
+    opacity: 0;
+    animation: buildLineAnim 10s linear forwards;
+  }
+
+  .payload {
+    position: absolute;
+    transform: translateX(-50%);
+    color: var(--bg);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    opacity: 0;
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .payload1 { background: var(--amber); animation: payload1Anim 10s linear forwards; }
+  .payload2 { background: var(--amber); animation: payload2Anim 10s linear forwards; }
+  .payload1a { background: var(--amber); animation: payload1aAnim 10s linear forwards; }
+  .payload2a { background: var(--amber); animation: payload2aAnim 10s linear forwards; }
+  .payload3 { background: var(--text); animation: payload3Anim 10s linear forwards; }
+
+  .edit-label {
+    position: absolute;
+    left: 288px;
+    transform: translateX(-50%);
+    color: var(--amber);
+    font-size: 20px;
+    font-weight: bold;
+    opacity: 0;
+    animation: editLabelAnim 10s linear forwards;
+  }
+
+  /* Keyframes */
+  @keyframes nodeAnimUE {
+    0%, 4.9% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    10%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+  @keyframes nodeAnimURK {
+    0%, 9.9% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    15%, 29.9% { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+    30% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); transform: translate(-50%, -50%) scale(1); }
+    35% { box-shadow: 0 0 20px 10px rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1.05); }
+    40%, 62.4% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1); }
+    62.5% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); transform: translate(-50%, -50%) scale(1); }
+    67.5% { box-shadow: 0 0 20px 10px rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1.05); }
+    72.5%, 100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1); opacity: 1;}
+  }
+  @keyframes nodeAnimRK {
+    0%, 14.9% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    20%, 39.9% { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+    40% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); transform: translate(-50%, -50%) scale(1); }
+    45% { box-shadow: 0 0 20px 10px rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1.05); }
+    50%, 69.9% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1); }
+    70% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); transform: translate(-50%, -50%) scale(1); }
+    75% { box-shadow: 0 0 20px 10px rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1.05); }
+    80%, 100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1); opacity: 1;}
+  }
+  @keyframes nodeAnimSim {
+    0%, 14.9% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    20%, 44.9% { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+    45% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); transform: translate(-50%, -50%) scale(1); }
+    50% { box-shadow: 0 0 20px 10px rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1.05); }
+    55%, 74.9% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1); }
+    75% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); transform: translate(-50%, -50%) scale(1); }
+    80% { box-shadow: 0 0 20px 10px rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1.05); }
+    85%, 100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); transform: translate(-50%, -50%) scale(1); opacity: 1;}
+  }
+  @keyframes nodeAnimAVP {
+    0%, 19.9% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    25%, 94.9% { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(242, 243, 245, 0); }
+    95% { box-shadow: 0 0 0 0 rgba(242, 243, 245, 0.7); transform: translate(-50%, -50%) scale(1); }
+    98% { box-shadow: 0 0 20px 10px rgba(242, 243, 245, 0); transform: translate(-50%, -50%) scale(1.05); }
+    100% { box-shadow: 0 0 0 0 rgba(242, 243, 245, 0); transform: translate(-50%, -50%) scale(1); opacity: 1;}
+  }
+
+  @keyframes flowLineDash {
+    to { stroke-dashoffset: -25; }
+  }
+  @keyframes liveLineAnim {
+    0%, 14.9% { opacity: 0; }
+    20%, 100% { opacity: 0.6; }
+  }
+  @keyframes buildLineAnim {
+    0%, 74.9% { opacity: 0; }
+    80%, 100% { opacity: 0.4; }
+  }
+
+  @keyframes payload1Anim {
+    0%, 19.9% { left: 288px; opacity: 0; top: 460px; }
+    20% { opacity: 1; }
+    38% { opacity: 1; }
+    40%, 100% { left: 1248px; opacity: 0; top: 460px; }
+  }
+  @keyframes payload2Anim {
+    0%, 54.9% { left: 288px; opacity: 0; top: 460px; }
+    55% { opacity: 1; }
+    68% { opacity: 1; }
+    70%, 100% { left: 1248px; opacity: 0; top: 460px; }
+  }
+  @keyframes payload1aAnim {
+    0%, 39.9% { left: 1270px; top: 540px; opacity: 0; }
+    40% { opacity: 1; top: 540px; }
+    44% { opacity: 1; }
+    45%, 100% { left: 1270px; opacity: 0; top: 800px; }
+  }
+  @keyframes payload2aAnim {
+    0%, 69.9% { left: 1270px; top: 540px; opacity: 0; }
+    70% { opacity: 1; top: 540px; }
+    74% { opacity: 1; }
+    75%, 100% { left: 1270px; opacity: 0; top: 800px; }
+  }
+  @keyframes payload3Anim {
+    0%, 79.9% { left: 1248px; opacity: 0; top: 460px; }
+    80% { opacity: 1; }
+    93% { opacity: 1; }
+    95%, 100% { left: 1728px; opacity: 0; top: 460px; }
+  }
+
+  @keyframes editLabelAnim {
+    0%, 49.9% { opacity: 0; transform: translate(-50%, 10px); top: 380px; }
+    50% { opacity: 1; transform: translate(-50%, 0); top: 380px; }
+    60% { opacity: 1; transform: translate(-50%, 0); top: 380px; }
+    65%, 100% { opacity: 0; transform: translate(-50%, -10px); top: 380px; }
+  }
+
+  .title {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    text-align: center;
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+</style>
+</head>
+<body>
+  <div id="container">
+    <div id="stage">
+      <div class="title">Live Editing Pipeline</div>
+      
+      <svg width="1920" height="1080">
+        <!-- Live Link horizontal -->
+        <line x1="288" y1="540" x2="1248" y2="540" stroke="#2dd4bf" stroke-width="4" stroke-dasharray="10 15" class="flow-line" />
+        <!-- Live Link vertical to simulator -->
+        <line x1="1248" y1="540" x2="1248" y2="800" stroke="#2dd4bf" stroke-width="4" stroke-dasharray="10 15" class="flow-line" />
+        <!-- Build Link horizontal -->
+        <line x1="1248" y1="540" x2="1728" y2="540" stroke="#f2f3f5" stroke-width="4" stroke-dasharray="8 8" class="build-line" />
+      </svg>
+
+      <div class="node node-ue">Unreal Engine 5.8</div>
+      <div class="node node-urk">URK Live Link</div>
+      <div class="node node-rk">RealityKit</div>
+      <div class="node node-avp">Apple Vision Pro</div>
+      <div class="node node-sim">visionOS Simulator</div>
+
+      <div class="payload payload1">USD Geometry + JSON Manifest</div>
+      <div class="payload payload1a">Update</div>
+      
+      <div class="edit-label">Editor Update: Material</div>
+      <div class="payload payload2">JSON Manifest</div>
+      <div class="payload payload2a">Update</div>
+
+      <div class="payload payload3">Packaged App</div>
+    </div>
+  </div>
+
+  <script>
+    function scaleStage() {
+      const stage = document.getElementById('stage');
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', scaleStage);
+    scaleStage();
+
+    window.__restart = function() {
+      const stage = document.getElementById('stage');
+      const clone = stage.cloneNode(true);
+      stage.parentNode.replaceChild(clone, stage);
+    };
+  </script>
+</body>
+</html>

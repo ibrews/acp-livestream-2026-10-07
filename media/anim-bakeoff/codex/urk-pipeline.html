@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>URK Live Link pipeline</title>
+<style>
+ :root{--bg:#0a0b0f;--paper:#f2f3f5;--teal:#2dd4bf;--amber:#fbbf24}
+ *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg)}
+ body{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--paper)}
+ #stage{position:absolute;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:radial-gradient(ellipse 1050px 550px at 55% 45%,#101a1b 0%,var(--bg) 75%)}
+ .eyebrow{position:absolute;left:128px;top:70px;font-size:19px;letter-spacing:.26em;color:var(--teal);font-weight:700;opacity:0}
+ h1{position:absolute;left:124px;top:120px;margin:0;font-size:82px;line-height:1.06;letter-spacing:-.058em;font-weight:700;opacity:0;transform:translateY(28px)}
+ .dek{position:absolute;left:128px;top:229px;margin:0;color:#a7b1b5;font-size:27px;opacity:0}
+ .hline{position:absolute;left:128px;right:128px;top:303px;height:1px;background:#ffffff25;transform:scaleX(0);transform-origin:left}
+ .stepnum{position:absolute;top:339px;font-size:17px;letter-spacing:.18em;color:#7e8b90;opacity:0}
+ .stepnum.n1{left:128px}.stepnum.n2{left:560px}.stepnum.n3{left:990px}.stepnum.n4{left:1430px}
+ .rail{position:absolute;left:440px;top:492px;width:1024px;height:2px;background:#2dd4bf37;opacity:0;box-shadow:0 0 14px #2dd4bf2e}
+ .rail:after{content:"";position:absolute;inset:-2px;background:repeating-linear-gradient(90deg,transparent 0 25px,#2dd4bf4d 26px 30px,transparent 31px 48px);opacity:.7}
+ .pulse{position:absolute;z-index:1;left:440px;top:484px;width:17px;height:17px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal),0 0 35px #2dd4bfaa;opacity:0}
+ .pulse.second{background:var(--amber);box-shadow:0 0 12px var(--amber),0 0 35px #fbbf24aa}
+ .node{position:absolute;z-index:2;top:391px;height:204px;background:#12171bcc;border:1px solid #3b4a4e;box-shadow:0 25px 70px #0008;opacity:0;transform:translateY(26px)}
+ .node:before{content:"";position:absolute;left:0;top:0;width:0;height:3px;background:var(--teal)}
+ .node .kind{position:absolute;left:27px;top:27px;font-size:16px;letter-spacing:.22em;color:var(--teal);font-weight:700}
+ .node .name{position:absolute;left:26px;top:70px;font-size:36px;line-height:1.13;letter-spacing:-.045em;font-weight:670}
+ .node .sub{position:absolute;left:27px;bottom:21px;font-size:18px;line-height:1.25;color:#9ca9ae;letter-spacing:.015em}
+ .unreal{left:128px;width:328px}.link{left:560px;width:330px}.reality{left:990px;width:320px}.headset{left:1430px;width:362px}
+ .node.headset .kind{color:var(--amber)}.node.headset:before{background:var(--amber)}
+ .edit{position:absolute;left:128px;top:635px;display:flex;align-items:center;gap:14px;color:#c9d0d1;font-size:19px;opacity:0}
+ .edit b{display:block;width:12px;height:12px;background:var(--amber);transform:rotate(45deg)}
+ .preview{position:absolute;left:990px;top:681px;width:444px;height:119px;border:1px solid #2dd4bf78;background:#0f1c1d;opacity:0;transform:translateY(18px)}
+ .preview:before{content:"";position:absolute;left:158px;top:-87px;width:1px;height:86px;background:linear-gradient(transparent,#2dd4bf8c)}
+ .preview .label{position:absolute;left:22px;top:21px;color:var(--teal);font-size:16px;letter-spacing:.21em;font-weight:700}
+ .preview .target{position:absolute;left:22px;top:52px;font-size:25px;font-weight:620}
+ .preview .scene{position:absolute;right:26px;top:40px;width:75px;height:48px;border:1px solid #4e7775}
+ .preview .scene:before{content:"";position:absolute;left:11px;bottom:8px;width:24px;height:24px;border:2px solid var(--teal);transform:rotate(0)}
+ .preview .scene:after{content:"";position:absolute;right:9px;top:10px;width:11px;height:11px;border-radius:50%;background:var(--amber)}
+ .hop{position:absolute;left:1458px;top:610px;font-size:18px;letter-spacing:.07em;color:#d9bb74;opacity:0}
+ .packet{position:absolute;left:128px;top:842px;width:1664px;height:82px;border-top:1px solid #ffffff25;border-bottom:1px solid #ffffff25;display:flex;align-items:center;gap:21px;opacity:0}
+ .packet .tag{font-size:16px;letter-spacing:.21em;color:var(--teal);font-weight:700;margin-right:18px}
+ .packet .chip{padding:11px 17px;border:1px solid #465458;background:#ffffff07;font-size:19px;color:#d6dede}
+ .packet .plus{font-size:26px;color:#6c8988}
+ .bottom{position:absolute;left:128px;right:128px;top:970px;display:flex;align-items:center;justify-content:space-between;font-size:19px;letter-spacing:.1em;color:#8e9da1;opacity:0}
+ .bottom strong{color:var(--teal);font-weight:620}
+ #stage.play .eyebrow{animation:fade .6s .2s both}#stage.play h1{animation:rise .9s .35s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .dek{animation:fade .75s .85s both}#stage.play .hline{animation:draw 1s .75s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .rail{animation:fade .6s 1.4s both}#stage.play .stepnum{animation:fade .45s 1.1s both}
+ #stage.play .unreal{animation:rise .65s 1.25s cubic-bezier(.16,1,.3,1) both}#stage.play .link{animation:rise .65s 2.15s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .reality{animation:rise .65s 3.05s cubic-bezier(.16,1,.3,1) both}#stage.play .headset{animation:rise .65s 4.15s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .node:before{animation:edge 1s 4.65s both}
+ #stage.play .pulse.first{animation:travel 3.05s 1.65s cubic-bezier(.28,.63,.32,1) both}
+ #stage.play .pulse.second{animation:travel 2.45s 6s cubic-bezier(.34,.68,.34,1) both}
+ #stage.play .preview{animation:rise .7s 3.8s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .preview .scene:before{animation:change .75s 7.25s cubic-bezier(.16,1,.3,1) both}
+ #stage.play .edit{animation:edit 2.7s 5.7s both}#stage.play .hop{animation:fade .7s 4.85s both}
+ #stage.play .packet{animation:fade .7s 4.7s both}#stage.play .bottom{animation:fade .7s 8.55s both}
+ @keyframes fade{to{opacity:1}}@keyframes rise{to{opacity:1;transform:none}}@keyframes draw{to{transform:scaleX(1)}}
+ @keyframes edge{to{width:100%}}@keyframes travel{0%{opacity:0;transform:translateX(0) scale(.5)}5%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateX(1024px) scale(1)}}
+ @keyframes edit{0%{opacity:0;transform:translateY(10px)}14%{opacity:1;transform:none}75%{opacity:1}100%{opacity:1}}
+ @keyframes change{to{transform:translate(17px,-7px) rotate(22deg);border-color:var(--amber);width:31px;height:31px}}
+</style>
+</head>
+<body>
+<main id="stage" aria-label="Live Unreal to visionOS pipeline">
+ <div class="eyebrow">UNREALITYKIT / LIVE LINK</div>
+ <h1>Edit in Unreal. See it in visionOS.</h1>
+ <p class="dek">Scene changes travel while editing continues.</p><div class="hline"></div>
+ <div class="stepnum n1">01 / SOURCE</div><div class="stepnum n2">02 / LINK</div><div class="stepnum n3">03 / RENDER</div><div class="stepnum n4">04 / DEVICE</div>
+ <div class="rail"></div><div class="pulse first"></div><div class="pulse second"></div>
+ <section class="node unreal"><div class="kind">EDITING</div><div class="name">Unreal Engine<br>5.8</div><div class="sub">geometry · lights<br>cameras · materials</div></section>
+ <section class="node link"><div class="kind">LIVE TRANSFER</div><div class="name">URK Live Link</div><div class="sub">change sent again on edit</div></section>
+ <section class="node reality"><div class="kind">SCENE</div><div class="name">RealityKit</div><div class="sub">visionOS scene assembly</div></section>
+ <section class="node headset"><div class="kind">DELIVERY</div><div class="name">Apple Vision Pro</div><div class="sub">packaged app</div></section>
+ <div class="edit"><b></b>EDIT IN UNREAL → SEND AGAIN</div>
+ <div class="preview"><div class="label">LIVE PREVIEW</div><div class="target">visionOS simulator</div><div class="scene" aria-hidden="true"></div></div>
+ <div class="hop">PACKAGED APP →</div>
+ <div class="packet"><span class="tag">ON THE WIRE</span><span class="chip">USD geometry</span><span class="plus">+</span><span class="chip">JSON manifest: transforms, lights, cameras</span><span class="plus">+</span><span class="chip">materials</span></div>
+ <div class="bottom"><span>LIVE PREVIEW: VISIONOS SIMULATOR</span><strong>EDIT → PREVIEW → EDIT → PREVIEW</strong></div>
+</main>
+<script>
+ const stage=document.getElementById('stage');
+ function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`}
+ addEventListener('resize',fit);fit();
+ window.__restart=()=>{stage.classList.remove('play');void stage.offsetWidth;stage.classList.add('play')};window.__restart();
+</script>
+</body>
+</html>
