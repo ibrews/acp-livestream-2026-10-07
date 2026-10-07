@@ -106,8 +106,7 @@ const SECTIONS = [
       { title: "Blueprint Anti-Pasta", subtitle: "One shortcut turns a tangled graph into straight spines. Free and open source", layout: "full", img: "media/trailers/blueprint-anti-pasta.mp4", bullets: [] },
       { title: "URMBridge", subtitle: "Take an Unreal level to Pixar RenderMan with one menu click", layout: "full", img: "media/trailers/urmbridge.mp4", bullets: [] },
       { title: "URKPreviewer", subtitle: "Live-stream an Unreal scene straight into RealityKit and visionOS", layout: "full", img: "media/trailers/urkpreviewer.mp4", bullets: [] },
-      { title: "How the live link actually works", subtitle: "Unreal to the headset, without an export step",
-        layout: "full", img: "IFRAME:media/anim/urk-pipeline.html", bullets: [] },
+      { title: "", subtitle: "", layout: "full", img: "IFRAME:media/anim/urk-pipeline.html", bullets: [] },
       { title: "Pinchwork", subtitle: "OpenXR hand tracking for the whole ecosystem — coming soon", layout: "full", img: "media/trailers/pinchwork.mp4", bullets: [] },
       { title: "This deck is one of the tools", subtitle: "Spatial Deck \u2014 one HTML file, no build step",
         layout: "big",
@@ -660,6 +659,15 @@ body[data-bg-style="extreme"] .bg-overlay--extreme{display:block}
   background:linear-gradient(to bottom,rgba(6,8,16,.92),rgba(6,8,16,.5) 60%,transparent)}
 .full-overlay h2{font-size:clamp(1.5rem,2.8vw,2.7rem);font-weight:600;letter-spacing:-.02em;line-height:1.14}
 .full-overlay .full-sub{font-size:clamp(.95rem,1.45vw,1.4rem);color:rgba(240,244,255,.74);margin-top:.35em;line-height:1.35}
+/* appendix: the model label must not sit on the animation's own title — compact top-right badge */
+.case-slide[data-year="APPX"] .full-overlay{left:auto;right:0;width:auto;background:none;
+  padding:clamp(14px,1.6vw,26px) clamp(18px,2vw,32px)}
+.case-slide[data-year="APPX"] .full-overlay h2{font-size:clamp(1rem,1.5vw,1.45rem);text-align:right;
+  background:rgba(6,8,16,.82);border:1px solid rgba(45,212,191,.3);border-radius:10px;
+  padding:.35em .7em;display:inline-block}
+.case-slide[data-year="APPX"] .full-overlay .full-sub{font-size:clamp(.72rem,.95vw,.92rem);
+  text-align:right;margin-top:.45em;max-width:34ch;margin-left:auto;
+  background:rgba(6,8,16,.7);border-radius:6px;padding:.3em .6em;display:inline-block}
 .grid-stage{position:absolute;inset:0;display:grid;gap:12px;padding:12px}
 .grid-stage[data-n="2"]{grid-template-columns:1fr 1fr}
 .grid-stage[data-n="3"]{grid-template-columns:repeat(3,1fr)}
