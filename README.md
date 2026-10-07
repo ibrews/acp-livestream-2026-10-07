@@ -21,7 +21,9 @@ cd acp-livestream-2026-10-07
 open index.html          # macOS; or double-click it, or serve the folder with any static server
 ```
 
-Use `→` / `←` (or click) to move between slides. Press `/` to search every slide.
+Use `→` / `←` (or click) to move between slides; on a phone, swipe or tap. Press `/` to search
+every slide. Every slide sits on a fixed 16:9 stage that scales to fit the screen, so it reads the
+same on a phone, a laptop or a projector — turn a phone sideways for the biggest view.
 
 ## What's in it
 
