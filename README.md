@@ -29,7 +29,7 @@ same on a phone, a laptop or a projector — turn a phone sideways for the bigge
 
 | | |
 |---|---|
-| **90 slides** | the seven live chapters, then *More from the Lab*, *Open source* and a motion-graphics bake-off |
+| **92 slides** | the seven live chapters, then *More from the Lab*, *Open source* and a motion-graphics bake-off |
 | **The Lab** | 2–5 slides per tool — trailer, what it is, real captures and video — for xrsim, Forage, Constellation, Promptbook, SceneAudit, Blueprint Anti-Pasta, URMBridge, UnRealityKit / URKPreviewer, Pinchwork and Spatial Deck, plus the all-tools reel |
 | **More from the Lab** | deeper UnRealityKit captures, the Vision Pro + OpenXR engine work, Project Ion, Video QA Workbench, the Fable Showcase |
 | **Open source** | Unreal Custodian and 25 more public repos, by their GitHub social cards |
@@ -53,6 +53,18 @@ works offline.
    built by Claude Opus, Codex and Gemini, side by side.
 5. **Make it yours.** Fork [Spatial Deck](https://github.com/ibrews/spatial-deck), edit the
    `SECTIONS` array near the top of `index.html`, and reload — every slide is generated from it.
+
+## More decks and repos
+
+Every one of these is a public Spatial Deck:
+[SensAI Hackademy — AI & MCP for Blender, Unreal & Godot](https://ibrews.github.io/sensai-2026-mcp-engines/) ·
+[HarvardXR keynote — 10 Lessons from 10 Years](https://ibrews.github.io/harvardxr-keynote/) ·
+[NXT BLD 2026 — Productizing XR for Architecture](https://ibrews.github.io/nxtbld-2026-productizing-xr/) ·
+[FMX 2026 — Spatial Storytelling](https://ibrews.github.io/fmx-2026-spatial-storytelling/) ·
+[Data Interchange in UE5](https://ibrews.github.io/data-interchange-ue5-class/) ·
+[A Decade Through the Lens](https://ibrews.github.io/decade-lens/) ·
+[Spatial Deck](https://ibrews.github.io/spatial-deck/) ([repo](https://github.com/ibrews/spatial-deck)).
+Everything else: [github.com/ibrews](https://github.com/ibrews).
 
 ## Credits
 

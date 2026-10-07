@@ -321,7 +321,7 @@ const SECTIONS = [
   { year: "OSS", accent: "purple",
     lesson: { title: "Open source.\nGo take it.",
       short: "OPEN SOURCE",
-      tagline: "All of this is public on GitHub right now — Unreal utilities, Godot on Vision Pro, Claude Code tooling, and some games.<br><br>github.com/ibrews",
+      tagline: "All of this is public on GitHub right now — Unreal utilities, Godot on Vision Pro, Claude Code tooling, and some games.<br><br>Everything else: <a class=\"deck-link-inline\" href=\"https://github.com/ibrews\" target=\"_blank\" rel=\"noopener\">github.com/ibrews</a>",
       tags: "Unreal · Godot · visionOS · Claude Code · Games" },
     cases: [
       { title: "Unreal Custodian", subtitle: "Get back the disk space your Unreal projects quietly hoard",
@@ -331,12 +331,12 @@ const SECTIONS = [
                   "Checks freshness twice, because file timestamps lie",
                   "Trash and Recycle Bin by default — clean is a dry run until you pass --apply",
                   "Free and open source — github.com/ibrews/unreal-custodian"] },
-      { title: "Unreal plumbing", subtitle: "TestFlight in one command, a macOS 26 crash fix, template content out of git, Anti-Pasta", layout: "grid", images: ["media/lab/oss/ue5-testflight.jpg", "media/lab/oss/unreal-mac-getstats-fix.jpg", "media/lab/oss/ue-reseed.jpg", "media/lab/oss/blueprint-auto-layout.jpg"], bullets: [] },
-      { title: "Godot, on Vision Pro", subtitle: "MetaHumans and a CC0 digital human in stock Godot, plus the visionOS toolchain", layout: "grid", images: ["media/lab/oss/MetaHumanGodot.jpg", "media/lab/oss/VitruvianGodot.jpg", "media/lab/oss/godot-avp-cascade.jpg", "media/lab/oss/godot-visionos-simulator-kit.jpg"], bullets: [] },
-      { title: "Spatial experiments", subtitle: "Gaussian splats on Vision Pro, spatial theater, a venue in your pocket, a living fractal", layout: "grid", images: ["media/lab/oss/SplatStage.jpg", "media/lab/oss/Understudy.jpg", "media/lab/oss/holodeck-pocket.jpg", "media/lab/oss/mandelbulb-xr.jpg"], bullets: [] },
-      { title: "Tools for working with Claude Code", subtitle: "Fleets, usage audits, Apple platform skills, GitHub plumbing", layout: "grid", images: ["media/lab/oss/claude-fleet.jpg", "media/lab/oss/claude-usage-audit.jpg", "media/lab/oss/apple-platform-skills.jpg", "media/lab/oss/gh-social-upload.jpg"], bullets: [] },
-      { title: "Small, sharp utilities", subtitle: "GitHub wikis from the terminal, lost screen recordings, Xcode GPU captures", layout: "grid", images: ["media/lab/oss/gh-wiki-init.jpg", "media/lab/oss/found-footage.jpg", "media/lab/oss/gputrace.jpg"], bullets: [] },
-      { title: "And some games", subtitle: "Swing City, Crystal Caper, Tank Commander, Neon Serpent, BurgerBandit, Spellrot", layout: "grid", images: ["media/lab/oss/swing-city.jpg", "media/lab/oss/crystal-caper.jpg", "media/lab/oss/TankCommanderVR.jpg", "media/lab/oss/NeonSerpent.jpg", "media/lab/oss/BurgerBandit.jpg", "media/lab/oss/spellrot-ue.jpg"], bullets: [] },
+      { title: "Unreal plumbing", subtitle: "TestFlight in one command, a macOS 26 crash fix, template content out of git, Anti-Pasta", layout: "grid", images: [{ src: "media/lab/oss/ue5-testflight.jpg", href: "https://github.com/ibrews/ue5-testflight" }, { src: "media/lab/oss/unreal-mac-getstats-fix.jpg", href: "https://github.com/ibrews/unreal-mac-getstats-fix" }, { src: "media/lab/oss/ue-reseed.jpg", href: "https://github.com/ibrews/ue-reseed" }, { src: "media/lab/oss/blueprint-auto-layout.jpg", href: "https://github.com/ibrews/blueprint-auto-layout" }], bullets: [] },
+      { title: "Godot, on Vision Pro", subtitle: "MetaHumans and a CC0 digital human in stock Godot, plus the visionOS toolchain", layout: "grid", images: [{ src: "media/lab/oss/MetaHumanGodot.jpg", href: "https://github.com/ibrews/MetaHumanGodot" }, { src: "media/lab/oss/VitruvianGodot.jpg", href: "https://github.com/ibrews/VitruvianGodot" }, { src: "media/lab/oss/godot-avp-cascade.jpg", href: "https://github.com/ibrews/godot-avp-cascade" }, { src: "media/lab/oss/godot-visionos-simulator-kit.jpg", href: "https://github.com/ibrews/godot-visionos-simulator-kit" }], bullets: [] },
+      { title: "Spatial experiments", subtitle: "Gaussian splats on Vision Pro, spatial theater, a venue in your pocket, a living fractal", layout: "grid", images: [{ src: "media/lab/oss/SplatStage.jpg", href: "https://github.com/ibrews/SplatStage" }, { src: "media/lab/oss/Understudy.jpg", href: "https://github.com/ibrews/Understudy" }, { src: "media/lab/oss/holodeck-pocket.jpg", href: "https://github.com/ibrews/holodeck-pocket" }, { src: "media/lab/oss/mandelbulb-xr.jpg", href: "https://github.com/ibrews/mandelbulb-xr" }], bullets: [] },
+      { title: "Tools for working with Claude Code", subtitle: "Fleets, usage audits, Apple platform skills, GitHub plumbing", layout: "grid", images: [{ src: "media/lab/oss/claude-fleet.jpg", href: "https://github.com/ibrews/claude-fleet" }, { src: "media/lab/oss/claude-usage-audit.jpg", href: "https://github.com/ibrews/claude-usage-audit" }, { src: "media/lab/oss/apple-platform-skills.jpg", href: "https://github.com/ibrews/apple-platform-skills" }, { src: "media/lab/oss/gh-social-upload.jpg", href: "https://github.com/ibrews/gh-social-upload" }], bullets: [] },
+      { title: "Small, sharp utilities", subtitle: "GitHub wikis from the terminal, lost screen recordings, Xcode GPU captures", layout: "grid", images: [{ src: "media/lab/oss/gh-wiki-init.jpg", href: "https://github.com/ibrews/gh-wiki-init" }, { src: "media/lab/oss/found-footage.jpg", href: "https://github.com/ibrews/found-footage" }, { src: "media/lab/oss/gputrace.jpg", href: "https://github.com/ibrews/gputrace" }], bullets: [] },
+      { title: "And some games", subtitle: "Swing City, Crystal Caper, Tank Commander, Neon Serpent, BurgerBandit, Spellrot", layout: "grid", images: [{ src: "media/lab/oss/swing-city.jpg", href: "https://github.com/ibrews/swing-city" }, { src: "media/lab/oss/crystal-caper.jpg", href: "https://github.com/ibrews/crystal-caper" }, { src: "media/lab/oss/TankCommanderVR.jpg", href: "https://github.com/ibrews/TankCommanderVR" }, { src: "media/lab/oss/NeonSerpent.jpg", href: "https://github.com/ibrews/NeonSerpent" }, { src: "media/lab/oss/BurgerBandit.jpg", href: "https://github.com/ibrews/BurgerBandit" }, { src: "media/lab/oss/spellrot-ue.jpg", href: "https://github.com/ibrews/spellrot-ue" }], bullets: [] },
     ] },
 
   { year: "APPX", accent: "rose",
@@ -354,6 +354,24 @@ const SECTIONS = [
       { title: "Opus \u2014 classes", subtitle: "Claude Opus 5", layout: "full", img: "IFRAME:media/anim/classes-reveal.html", bullets: [] },
       { title: "Codex \u2014 classes", subtitle: "Codex \u2014 real table columns and a two-part bracket", layout: "full", img: "IFRAME:media/anim-bakeoff/codex/classes-reveal.html", bullets: [] },
       { title: "Gemini \u2014 classes", subtitle: "Gemini", layout: "full", img: "IFRAME:media/anim-bakeoff/gemini/classes-reveal.html", bullets: [] },
+    ] },
+  { year: "MORE", accent: "teal",
+    lesson: { title: "My other decks.\nAnd all the repos.",
+      short: "MORE DECKS",
+      tagline: "Every one of these is a Spatial Deck, public, and yours to poke at. Tap a card to open it.<br><br><a class=\"deck-link-inline\" href=\"https://github.com/ibrews\" target=\"_blank\" rel=\"noopener\">github.com/ibrews</a> has everything else.",
+      tags: "SensAI \u00b7 HarvardXR \u00b7 NXT BLD \u00b7 FMX \u00b7 Data Interchange \u00b7 A Decade Through the Lens" },
+    cases: [
+      { title: "My other decks", subtitle: "Tap any card \u2014 it opens in a new tab", layout: "grid",
+        images: [{ src: "media/decks/sensai-2026-mcp-engines.jpg", label: "SensAI Hackademy \u2014 AI & MCP for Blender, Unreal & Godot", href: "https://ibrews.github.io/sensai-2026-mcp-engines/" },
+                 { src: "media/decks/harvardxr-keynote.jpg", label: "HarvardXR keynote \u2014 10 lessons from 10 years", href: "https://ibrews.github.io/harvardxr-keynote/" },
+                 { src: "media/decks/nxtbld-2026-productizing-xr.jpg", label: "NXT BLD 2026 \u2014 Productizing XR for Architecture", href: "https://ibrews.github.io/nxtbld-2026-productizing-xr/" },
+                 { src: "media/decks/fmx-2026-spatial-storytelling.jpg", label: "FMX 2026 \u2014 Spatial Storytelling", href: "https://ibrews.github.io/fmx-2026-spatial-storytelling/" },
+                 { src: "media/decks/data-interchange-ue5-class.jpg", label: "Data Interchange in UE5 \u2014 the Sep 30 class", href: "https://ibrews.github.io/data-interchange-ue5-class/" },
+                 { src: "media/decks/decade-lens.jpg", label: "A Decade Through the Lens", href: "https://ibrews.github.io/decade-lens/" },
+                 { src: "media/decks/spatial-deck.jpg", label: "Spatial Deck \u2014 the live demo", href: "https://ibrews.github.io/spatial-deck/" },
+                 { src: "media/decks/spatial-deck.jpg", label: "Spatial Deck on GitHub \u2014 fork it", href: "https://github.com/ibrews/spatial-deck" },
+                 { src: "media/decks/github-ibrews.jpg", label: "Everything else: github.com/ibrews", href: "https://github.com/ibrews" }],
+        bullets: [] },
     ] },
 ];
 
@@ -828,6 +846,9 @@ body[data-bg-style="extreme"] .bg-overlay--extreme{display:block}
 .grid-cell img,.grid-cell video{width:100%;height:100%;object-fit:contain;display:block}
 .grid-cover .grid-cell img,.grid-cover .grid-cell video{object-fit:cover}
 .case-slide:not(.grid-cover) .grid-stage{padding-bottom:clamp(96px,calc(13*var(--vh)),150px)}
+.grid-stage[data-n="9"]{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+.deck-link{display:block;cursor:pointer;outline:1px solid rgba(0,212,255,.25)}.deck-link:hover{outline:2px solid var(--teal)}
+.deck-link-inline{color:var(--teal);text-decoration:none;pointer-events:auto}
 .grid-label{position:absolute;left:12px;top:12px;z-index:2;padding:5px 12px;border-radius:8px;background:rgba(6,8,16,.8);color:#f0f4ff;font-size:clamp(.72rem,calc(1.05*var(--vw)),1.05rem);font-weight:600;letter-spacing:.01em}
 .cyc{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#0b0d16}
 .cyc-item{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .9s ease}
@@ -1099,6 +1120,7 @@ SECTIONS.forEach((sec,si)=>{
       const cells=c.images.map(it=>{
         const src=typeof it==='string'?it:it.src;const lbl=(typeof it==='object'&&it.label)?`<div class="grid-label">${it.label}</div>`:'';
         const inner=/\.(mp4|webm)$/i.test(src)?`<video src="${src}" autoplay loop muted playsinline></video>`:`<img src="${src}" loading="lazy">`;
+        if(typeof it==='object'&&it.href)return `<a class="grid-cell deck-link" href="${it.href}" target="_blank" rel="noopener">${inner}${lbl}</a>`;
         return `<div class="grid-cell">${inner}${lbl}</div>`;
       }).join('');
       const ov=(c.title||c.subtitle)?`<div class="grid-overlay">${c.title?`<h2>${c.title}</h2>`:''}${c.subtitle?`<div class="grid-sub">${c.subtitle}</div>`:''}</div>`:'';
@@ -1209,6 +1231,8 @@ SECTIONS.forEach((sec,si)=>{
 
 // Two-pane image cyclers advance every 3 s, only on the active slide
 setInterval(()=>{document.querySelectorAll('.slide.active .cyc').forEach(cy=>{const it=[...cy.children];const k=it.findIndex(x=>x.classList.contains('on'));it[k]?.classList.remove('on');it[(k+1)%it.length].classList.add('on');});},3000);
+// Links inside slides open in a new tab and never advance the deck
+document.addEventListener('click',e=>{if(e.target.closest('a.deck-link,a.deck-link-inline'))e.stopPropagation();},true);
 // Bonus
 const bon=document.createElement('div');bon.className='slide slide-lesson slide-bonus';bon.dataset.type='bonus';bon.dataset.year=BONUS.year;
 bon.innerHTML=`<div class="year-ghost">${BONUS.year}</div><div class="lesson-ey"><span class="ey-yr">${BONUS.year}</span><span class="ey-sep">&middot;</span><span class="ey-badge" style="color:var(--amber)">${BONUS.year||'CODA'}</span></div><h2 class="lesson-title">${BONUS.title}</h2><p class="lesson-tagline">${BONUS.tagline.replace(/<br><br>/g,'<br><span class="para-gap"></span>')}</p><div class="lesson-rule" style="background:var(--amber)"></div>`;
@@ -1323,7 +1347,7 @@ const cls=document.createElement('div');cls.className='slide';cls.dataset.type='
 cls.innerHTML=`<div class="close-ey">Thank You</div><h2 class="close-title">Let\u2019s Talk.</h2><p class="close-sub">Questions in the chat \u2014 I will stay on as long as there are any.</p>
 <div class="contact-row"><div class="contact-pill"><span class="lbl">Classes</span>alexcoulombepresents.com/classes</div><div class="contact-pill"><span class="lbl">Members</span>alexcoulombepresents.com/members</div></div>
 <div class="close-qr-row"><div style="text-align:center;padding:clamp(18px,calc(2.4*var(--vw)),34px) clamp(26px,calc(3.4*var(--vw)),52px);border:1px solid rgba(45,212,191,.35);border-radius:16px;background:rgba(10,12,20,.5)"><div style="font-size:clamp(1.6rem,calc(3.2*var(--vw)),3rem);font-weight:700;letter-spacing:-.02em;color:#f0f4ff">alexcoulombepresents.com</div><div style="font-size:clamp(.85rem,calc(1.2*var(--vw)),1.15rem);color:rgba(240,244,255,.55);margin-top:.5em;letter-spacing:.08em">NEWSLETTER \u00b7 CLASSES \u00b7 THE LAB</div></div></div>
-<div style="position:absolute;bottom:clamp(30px,calc(4*var(--vh)),60px);left:50%;transform:translateX(-50%);opacity:.5;z-index:2;font-size:clamp(.8rem,calc(1.1*var(--vw)),1.05rem);letter-spacing:.3em;color:rgba(240,244,255,.6);font-weight:600">ALEX COULOMBE PRESENTS</div>`;
+<div style="position:absolute;bottom:clamp(30px,calc(4*var(--vh)),60px);left:50%;transform:translateX(-50%);opacity:.5;z-index:2;font-size:clamp(.8rem,calc(1.1*var(--vw)),1.05rem);letter-spacing:.3em;color:rgba(240,244,255,.6);font-weight:600">ALEX COULOMBE PRESENTS<div style="margin-top:22px;font-size:15px;line-height:1.9;color:rgba(240,244,255,.6);text-align:center;pointer-events:auto">More decks: <a class="deck-link-inline" href="https://ibrews.github.io/sensai-2026-mcp-engines/" target="_blank" rel="noopener">SensAI</a> &middot; <a class="deck-link-inline" href="https://ibrews.github.io/harvardxr-keynote/" target="_blank" rel="noopener">HarvardXR</a> &middot; <a class="deck-link-inline" href="https://ibrews.github.io/nxtbld-2026-productizing-xr/" target="_blank" rel="noopener">NXT BLD</a> &middot; <a class="deck-link-inline" href="https://ibrews.github.io/fmx-2026-spatial-storytelling/" target="_blank" rel="noopener">FMX</a> &middot; <a class="deck-link-inline" href="https://ibrews.github.io/data-interchange-ue5-class/" target="_blank" rel="noopener">Data Interchange</a> &middot; <a class="deck-link-inline" href="https://ibrews.github.io/decade-lens/" target="_blank" rel="noopener">A Decade Through the Lens</a> &middot; <a class="deck-link-inline" href="https://ibrews.github.io/spatial-deck/" target="_blank" rel="noopener">Spatial Deck</a><br>Repos: <a class="deck-link-inline" href="https://github.com/ibrews" target="_blank" rel="noopener">github.com/ibrews</a> &middot; <a class="deck-link-inline" href="https://github.com/ibrews/spatial-deck" target="_blank" rel="noopener">github.com/ibrews/spatial-deck</a></div></div>`;
 deck.appendChild(cls);allSlides.push(cls);
 
 // Navigation
@@ -1363,7 +1387,7 @@ document.addEventListener('keydown',e=>{
 });
 let touchX=0,touchY=0,touchT=0,lastTapT=0,wasPinch=false;
 document.addEventListener('touchstart',e=>{if(document.body.classList.contains('notes-mode'))return;if(e.touches.length>1){wasPinch=true;return;}touchX=e.touches[0].clientX;touchY=e.touches[0].clientY;touchT=Date.now();},{passive:true});
-document.addEventListener('touchend',e=>{if(document.body.classList.contains('notes-mode'))return;if(wasPinch){if(e.touches.length===0)wasPinch=false;return;}const dx=e.changedTouches[0].clientX-touchX;const dy=e.changedTouches[0].clientY-touchY;const dt=Date.now()-touchT;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){lastTapT=0;dx<0?(window._arrowSubstep!==false&&advanceStep()?0:goNext()):goPrev();}else if(Math.abs(dx)<15&&Math.abs(dy)<15&&dt<300){if(window._arrowSubstep!==false&&advanceStep())return;goNext();}},{passive:true});
+document.addEventListener('touchend',e=>{if(document.body.classList.contains('notes-mode'))return;if(e.target.closest&&e.target.closest('a.deck-link,a.deck-link-inline'))return;if(wasPinch){if(e.touches.length===0)wasPinch=false;return;}const dx=e.changedTouches[0].clientX-touchX;const dy=e.changedTouches[0].clientY-touchY;const dt=Date.now()-touchT;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){lastTapT=0;dx<0?(window._arrowSubstep!==false&&advanceStep()?0:goNext()):goPrev();}else if(Math.abs(dx)<15&&Math.abs(dy)<15&&dt<300){if(window._arrowSubstep!==false&&advanceStep())return;goNext();}},{passive:true});
 // Double-click (desktop): advance substep or next event — same as arrow/tap
 document.addEventListener('dblclick',e=>{
   if(window._moveMode)return;
