@@ -27,7 +27,7 @@ Use `→` / `←` (or click) to move between slides. Press `/` to search every s
 
 | | |
 |---|---|
-| **__SLIDES__ slides** | the eight live chapters, then *More from the Lab*, *Open source* and a motion-graphics bake-off |
+| **108 slides** | the eight live chapters, then *More from the Lab*, *Open source* and a motion-graphics bake-off |
 | **The Lab** | 1–6 slides per tool — trailer, what it is, real captures and video — for xrsim, Forage, Constellation, Promptbook, SceneAudit, Blueprint Anti-Pasta, URMBridge, UnRealityKit / URKPreviewer, Pinchwork and Spatial Deck, plus the all-tools reel |
 | **More from the Lab** | deeper UnRealityKit captures, the Vision Pro + OpenXR engine work, Project Ion, Video QA Workbench, the Fable Showcase |
 | **Open source** | Unreal Custodian and 25 more public repos, by their GitHub social cards |
