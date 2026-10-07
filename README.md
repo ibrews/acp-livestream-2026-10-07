@@ -29,7 +29,7 @@ same on a phone, a laptop or a projector — turn a phone sideways for the bigge
 
 | | |
 |---|---|
-| **87 slides** | the seven live chapters, then *More from the Lab*, *Open source* and a motion-graphics bake-off |
+| **90 slides** | the seven live chapters, then *More from the Lab*, *Open source* and a motion-graphics bake-off |
 | **The Lab** | 2–5 slides per tool — trailer, what it is, real captures and video — for xrsim, Forage, Constellation, Promptbook, SceneAudit, Blueprint Anti-Pasta, URMBridge, UnRealityKit / URKPreviewer, Pinchwork and Spatial Deck, plus the all-tools reel |
 | **More from the Lab** | deeper UnRealityKit captures, the Vision Pro + OpenXR engine work, Project Ion, Video QA Workbench, the Fable Showcase |
 | **Open source** | Unreal Custodian and 25 more public repos, by their GitHub social cards |
