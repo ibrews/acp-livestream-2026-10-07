@@ -41,7 +41,7 @@ const SECTIONS = [
   { year: "OPEN", accent: "teal",
     lesson: { title: "Live AMA: Meta\u2019s VR Glasses,\nthe Member Toolkit,\nand What\u2019s Next",
       short: "COLD OPEN",
-      tagline: "Free and public. Two hours. The floor is open \u2014 I just got back from Meta Connect, so start there if you want.<br><br>Everything you see today is something that exists and runs. No slideware.",
+      tagline: "Free and public. One hour. The floor is open \u2014 I just got back from Meta Connect, so start there if you want.<br><br>Everything you see today is something that exists and runs. No slideware.",
       tags: "October 7, 2026 \u00b7 Unreal Engine \u00b7 XR \u00b7 Apple Vision Pro" },
     cases: [
       { title: "", subtitle: "", layout: "full", img: "IFRAME:media/anim/cold-open.html", bullets: [] },
@@ -95,24 +95,131 @@ const SECTIONS = [
   { year: "CH 3", accent: "amber",
     lesson: { title: "The Lab.\nEverything I build, in one place.",
       short: "THE LAB",
-      tagline: "These are not mockups. Every one of these runs, and most of them I use on real client work.<br><br>Nothing here is for sale yet \u2014 today is a tour, not a checkout line.",
-      tags: "Unreal plugins \u00b7 visionOS apps \u00b7 CLI tools \u00b7 Open source" },
+      tagline: "These are not mockups. Every one of these runs, and most of them I use on real client work.<br><br>Nothing here is for sale yet — today is a tour, not a checkout line.",
+      tags: "Unreal plugins · visionOS apps · CLI tools · Open source" },
     cases: [
+      // ── xrsim ──
       { title: "xrsim", subtitle: "Test a VR build with no headset on your desk", layout: "full", img: "media/trailers/xrsim.mp4", bullets: [] },
+      { title: "xrsim", subtitle: "A simulator for VR apps — no headset, no human in the room",
+        img: "media/posters/xrsim.jpg",
+        bullets: ["Boot a VR build with no headset on the desk — xrsim simulates the headset and you drive it from a browser cockpit",
+                  "Script the headset from the command line: pose, controllers, hands, buttons, screenshots, record and replay",
+                  "Assert on what the app actually believes — state dumps, not screenshots",
+                  "Built so an AI agent can test an XR build end to end",
+                  "Public CLI, installed with npm — the source is not open yet"] },
+      { title: "The cockpit", subtitle: "A live xrsim session: stereo view, pose, hands, controls and FPS", layout: "full", img: "media/lab/xrsim/cockpit.jpg", bullets: [] },
+      { title: "The fleet view", subtitle: "Several simulated sessions on one dashboard", layout: "full", img: "media/lab/xrsim/fleet-dashboard.jpg", bullets: [] },
+      { title: "Driving a real Unreal build", subtitle: "A hand-tracked throw, performed by xrsim — wide and close", layout: "grid", images: ["media/lab/xrsim/hand-throw-wide.mp4", "media/lab/xrsim/hand-throw-close.mp4"], bullets: [] },
+
+      // ── Forage ──
       { title: "Forage", subtitle: "Ask your own Unreal asset library, in plain English", layout: "full", img: "media/trailers/forage.mp4", bullets: [] },
+      { title: "Forage", subtitle: "Fab’s best friend — a scout for the packs you already own",
+        img: "media/posters/forage.jpg",
+        bullets: ["Ask for what you pictured, in plain English, against your own library",
+                  "Searches a local index — no network and no login for a query",
+                  "On my machine: 967 packs, 3,532 project versions, 72.6% of them dead weight",
+                  "Forage for Fab, a Chrome extension, badges what you already own right on fab.com",
+                  "Private beta — the wishlist is open"] },
+      { title: "Your library, local only", subtitle: "967 owned packs, 3,532 versions, 2,565 of them prunable", layout: "full", img: "media/lab/forage/web-ui.jpg", bullets: [] },
+      { title: "Posture and consent", subtitle: "Every automated action sits behind a gate you can see", layout: "full", img: "media/lab/forage/posture-gates.jpg", bullets: [] },
+      { title: "Forage, the video", subtitle: "FORAGE — Fab’s best friend", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/oQf8w26a36M?rel=0", bullets: [] },
+
+      // ── Constellation ──
       { title: "Constellation", subtitle: "Your markdown vault as a walk-in star map on Vision Pro", layout: "full", img: "media/trailers/constellation.mp4", bullets: [] },
+      { title: "Constellation", subtitle: "Your second brain as a navigable 3D star map",
+        img: "media/posters/constellation.jpg",
+        bullets: ["Notes are stars, wiki-links are light",
+                  "Search to light up matches, tap a folder chip to isolate a cluster, or step inside",
+                  "Walk through your own notes on Apple Vision Pro",
+                  "Private — building toward bring-your-own-vault"] },
+      { title: "In the visionOS simulator", subtitle: "Shown with a 79-note demo vault — not my real one", layout: "full", img: "media/lab/constellation/sim-demo-vault.jpg", bullets: [] },
+
+      // ── Promptbook ──
       { title: "Promptbook", subtitle: "Block a show on a tabletop stage, then stand in it at full scale", layout: "full", img: "media/trailers/promptbook.mp4", bullets: [] },
+      { title: "Promptbook", subtitle: "The stage manager’s promptbook, reimagined in 3D",
+        img: "media/posters/promptbook.jpg",
+        bullets: ["Spatial blocking and set previz for theatre on Apple Vision Pro",
+                  "Block on a tabletop stage and scrub the beats on a timeline",
+                  "Then step onto the full-scale stage and check any sightline in the house",
+                  "Bring your own set model as USDZ",
+                  "Built for Agile Lens — exploring a wider release"] },
+      { title: "A Midsummer Night’s Dream, Act II", subtitle: "Promptbook in the visionOS simulator — beats, ghosts and the stage controls", layout: "full", img: "media/lab/promptbook/sim-midsummer.jpg", bullets: [] },
+
+      // ── SceneAudit ──
       { title: "SceneAudit", subtitle: "Numeric verdicts on 3D placement — the viewport is not a measuring instrument", layout: "full", img: "media/trailers/sceneaudit.mp4", bullets: [] },
+      { title: "SceneAudit", subtitle: "Measure the gap your viewport hides",
+        img: "media/posters/sceneaudit.jpg",
+        bullets: ["Numeric verdicts on placement in Unreal — seated, floating, misplaced",
+                  "Every miss comes with the correction to apply",
+                  "Quad-view renders with the numbers baked into the image",
+                  "Built for AI agents working in 3D, useful for humans too",
+                  "Unreal Engine plugin — contact for access"] },
+      { title: "Three real verdicts", subtitle: "Seated, floating, scale mismatch — from the repo’s own demo", layout: "grid", images: ["media/lab/sceneaudit/verdict-seated.png", "media/lab/sceneaudit/verdict-floating.png", "media/lab/sceneaudit/verdict-scale-mismatch.png"], bullets: [] },
+
+      // ── Blueprint Anti-Pasta ──
       { title: "Blueprint Anti-Pasta", subtitle: "One shortcut turns a tangled graph into straight spines. Free and open source", layout: "full", img: "media/trailers/blueprint-anti-pasta.mp4", bullets: [] },
+      { title: "Blueprint Anti-Pasta", subtitle: "Pin-aware auto-layout for Unreal Blueprint graphs — Ctrl/Cmd+Shift+L",
+        img: "media/posters/blueprint-anti-pasta.jpg",
+        bullets: ["The white execution spine reads as one clean horizontal line",
+                  "Long edges are knot-routed through reserved lanes instead of snaking across the graph",
+                  "Auto-grouping into named, keyword-colored comment boxes",
+                  "No node ever lands on top of another",
+                  "Free and open source — github.com/ibrews/blueprint-auto-layout"] },
+      { title: "One keystroke", subtitle: "The layout pass, start to finish", layout: "full", img: "media/lab/bap/demo.mp4", bullets: [] },
+      { title: "Before and after", subtitle: "Straight execution spines, providers clustered to their consumer", layout: "full", img: "media/lab/bap/before-after.jpg", bullets: [] },
+      { title: "Grouped and colored", subtitle: "Comment boxes named and colored by keyword", layout: "grid", images: ["media/lab/bap/grouped-colored.jpg", "media/lab/bap/cleanup.jpg"], bullets: [] },
+
+      // ── URMBridge ──
       { title: "URMBridge", subtitle: "Take an Unreal level to Pixar RenderMan with one menu click", layout: "full", img: "media/trailers/urmbridge.mp4", bullets: [] },
+      { title: "URMBridge", subtitle: "Unreal for the speed. RenderMan for the frame.",
+        img: "media/posters/urmbridge.jpg",
+        bullets: ["One button in the Unreal editor, film-grade Pixar RenderMan on the other side",
+                  "No manual re-authoring of the level",
+                  "Same camera, same shot — rendered both ways so you can compare",
+                  "In development — it already renders end to end from the button"] },
+      { title: "Same shot, both renderers", subtitle: "Left: Unreal. Right: RenderMan, through the bridge", layout: "full", img: "media/lab/urmbridge/side-by-side.mp4", bullets: [] },
+      { title: "The two films", subtitle: "The Unreal reference and the RenderMan output, full frame", layout: "grid", images: ["media/lab/urmbridge/unreal-reference.mp4", "media/lab/urmbridge/renderman-film.mp4"], bullets: [] },
+
+      // ── URKPreviewer / UnRealityKit ──
       { title: "URKPreviewer", subtitle: "Live-stream an Unreal scene straight into RealityKit and visionOS", layout: "full", img: "media/trailers/urkpreviewer.mp4", bullets: [] },
       { title: "", subtitle: "", layout: "full", img: "IFRAME:media/anim/urk-pipeline.html", bullets: [] },
+      { title: "UnRealityKit + URKPreviewer", subtitle: "Unreal as the simulation brain, RealityKit as the renderer",
+        img: "media/posters/urkpreviewer.jpg",
+        bullets: ["Live-stream an Unreal editor scene into RealityKit on visionOS",
+                  "An edit in Unreal reaches the viewer in about six seconds, with no re-export",
+                  "URKPreviewer exports to a standalone Xcode project when you are ready to own the output",
+                  "Collaborator beta — hardware-verified on Apple Vision Pro"] },
+      { title: "Your live editor scene, in RealityKit", subtitle: "Mixed mode in the visionOS simulator — 56 actors, poll 15 Hz, smooth 90 Hz", layout: "full", img: "media/lab/urk/livelink-mixed-live.jpg", bullets: [] },
+      { title: "One edit, no re-export", subtitle: "Before and after moving a light panel in Unreal — the viewer just followed", layout: "grid", images: ["media/lab/urk/edit-before.png", "media/lab/urk/edit-after.png"], bullets: [] },
+      { title: "UnRealityKit, the video", subtitle: "Unreal Engine + RealityKit Bridge", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/AJC9-nNenAk?rel=0", bullets: [] },
+
+      // ── Pinchwork ──
       { title: "Pinchwork", subtitle: "OpenXR hand tracking for the whole ecosystem — coming soon", layout: "full", img: "media/trailers/pinchwork.mp4", bullets: [] },
-      { title: "This deck is one of the tools", subtitle: "Spatial Deck \u2014 one HTML file, no build step",
+      { title: "Pinchwork", subtitle: "Universal OpenXR hand tracking — built in Unreal first",
+        img: "media/posters/pinchwork.jpg",
+        bullets: ["Designed for every headset, not just one",
+                  "Built in Unreal first",
+                  "In development — a teaser, not a release"] },
+
+      // ── Spatial Deck ──
+      { title: "This deck is one of the tools", subtitle: "Spatial Deck — one HTML file, no build step",
         layout: "big",
         bigText: "You are looking at it.",
         bigCaption: "Spatial Deck is a single-file HTML presentation framework. No npm, no bundler, no slides app. github.com/ibrews/spatial-deck",
         bullets: [] },
+      { title: "Spatial Deck in motion", subtitle: "Real slides, live transitions, media reveals", layout: "full", img: "media/lab/spatial-deck/hero.mp4", bullets: [] },
+      { title: "Spatial Deck", subtitle: "The presentation framework for people who think spatially",
+        img: "media/lab/spatial-deck/social-card.png",
+        bullets: ["One HTML file — no cloud, no build process, no lock-in",
+                  "Annotation and move modes designed for AI-collaborative editing",
+                  "Canvas media galleries, Web Audio, pixelated reveal effects",
+                  "Hands back a pixel-faithful PDF when someone asks for ‘the deck’",
+                  "Open source — github.com/ibrews/spatial-deck"] },
+      { title: "Lessons, cases, the map, presenting", subtitle: "Four of the built-in slide types and views", layout: "grid", images: ["media/lab/spatial-deck/screenshot-lesson.jpg", "media/lab/spatial-deck/screenshot-case.jpg", "media/lab/spatial-deck/screenshot-map.jpg", "media/lab/spatial-deck/screenshot-presentation.jpg"], bullets: [] },
+      { title: "Annotate, move, theme", subtitle: "Edit the deck from inside the deck", layout: "grid", images: ["media/lab/spatial-deck/screenshot-annotation.jpg", "media/lab/spatial-deck/screenshot-movemode.jpg", "media/lab/spatial-deck/screenshot-settings.jpg"], bullets: [] },
+
+      // ── Everything at once ──
+      { title: "Every tool, back to back", subtitle: "The all-tools reel — nine trailers, 3:16", layout: "full", img: "media/trailers/all-tools-reel.mp4", bullets: [] },
     ] },
 
   { year: "CH 4", accent: "rose",
@@ -122,6 +229,7 @@ const SECTIONS = [
       tags: "Live classes \u00b7 Recordings \u00b7 Lab tools \u00b7 Your vote" },
     cases: [
       { title: "Become a member", subtitle: "Live classes, the whole library, the Lab tools, and your vote", layout: "full", img: "media/trailers/become-a-member.mp4", bullets: [] },
+      { title: "Tutorials go stale. Live classes don\u2019t.", subtitle: "Alex Coulombe Presents membership", layout: "full", img: "media/posters/become-a-member.jpg", bullets: [] },
       { title: "What membership actually gets you", subtitle: "alexcoulombepresents.com/members",
         img: "media/class-frames/intro-to-metahumans-2026-08-26-55m10s.png",
         bullets: ["Live classes and office hours every month, taught by me and by guests",
@@ -192,6 +300,62 @@ const SECTIONS = [
         bullets: ["Nov 17\u201319 \u2014 PMRE 2026, Palms Casino Resort, Las Vegas. Keynote: Architect to XR-chitect: The Best Career Advice I Ever Ignored, Nov 19 at 11am PST",
                   "Dec 8 \u2014 UnitedXR Europe, Maison de la Poste, Brussels. Hosting the startup pitch competition",
                   "Finalists announced Oct 15; the winner is named Dec 9"] },
+    ] },
+
+  { year: "LAB+", accent: "teal",
+    lesson: { title: "More from the Lab.\nFor the people exploring.",
+      short: "MORE LAB",
+      tagline: "Everything that did not fit in the hour: deeper UnRealityKit footage, the Vision Pro engine work, and the tools that live on the Lab page.<br><br>alexcoulombepresents.com/lab",
+      tags: "UnRealityKit · Vision Pro + OpenXR · Project Ion · Video QA · Fable" },
+    cases: [
+      { title: "UnRealityKit: geometry streams in", subtitle: "Proxies first, then all 56 meshes — the same scene, a few seconds apart", layout: "grid", images: ["media/lab/urk/streaming-proxies.jpg", "media/lab/urk/streaming-56-meshes.jpg"], bullets: [] },
+      { title: "UnRealityKit: lighting modes", subtitle: "The same scene under different lighting modes, compared", layout: "full", img: "media/lab/urk/lighting-modes.jpg", bullets: [] },
+      { title: "UnRealityKit: materials across the bridge", subtitle: "Alpha, masked and emissive materials in RealityKit", layout: "full", img: "media/lab/urk/materialx-probe.jpg", bullets: [] },
+      { title: "UnRealityKit: Live Link test", subtitle: "Alex Coulombe Presents on YouTube", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/q1Y5C86BxP0?rel=0", bullets: [] },
+      { title: "UnRealityKit: Lumen update", subtitle: "Alex Coulombe Presents on YouTube", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/0xpZmB7ia1E?rel=0", bullets: [] },
+      { title: "UnRealityKit: skinned skeletal meshes", subtitle: "Alex Coulombe Presents on YouTube", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/ePhtrL1mtBw?rel=0", bullets: [] },
+      { title: "Cropping a MetaHuman in visionOS 27", subtitle: "Alex Coulombe Presents on YouTube", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/uf9O7hkbYwQ?rel=0", bullets: [] },
+      { title: "Everything I’m building with UE 5.8 on Vision Pro", subtitle: "The engine-level work behind Unreal on Apple Vision Pro over OpenXR", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/ReJuECqdIM4?rel=0", bullets: [] },
+      { title: "UE 5.8 Lumen on Apple Vision Pro", subtitle: "Lumen and Nanite research, pushing further", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/QqDW-3tio0o?rel=0", bullets: [] },
+      { title: "Translucency over mixed reality", subtitle: "Vision Pro + OpenXR engine work", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/PLynIuxA9r8?rel=0", bullets: [] },
+      { title: "Hand tracking and interaction", subtitle: "Unreal on Apple Vision Pro — the groundwork under Pinchwork", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/R6NGhLpUZnw?rel=0", bullets: [] },
+      { title: "Project Ion", subtitle: "Your Vision Pro is a projector now — projection-mapping previz. Beta, 50+ TestFlight testers", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/ZvIOucsVScw?rel=0", bullets: [] },
+      { title: "Project Ion: June update", subtitle: "Alex Coulombe Presents on YouTube", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/LOnijsxamts?rel=0", bullets: [] },
+      { title: "Project Ion: Frank and Bob visit the Chicago Bean", subtitle: "Alex Coulombe Presents on YouTube", layout: "full", img: "IFRAME:https://www.youtube-nocookie.com/embed/EqFayHb1AQo?rel=0", bullets: [] },
+      { title: "Video QA Workbench", subtitle: "Stop scrubbing for proof. Review the whole render with evidence.",
+        img: "media/lab/vqa/field-guide.jpg",
+        bullets: ["Put two aligned stills, or matched video frames, side by side",
+                  "See where they disagree: regional luma, color, edge structure, tiles and a heatmap",
+                  "It does not flatten a renderer comparison into a single winner",
+                  "Design-partner preview — local-first"] },
+      { title: "Fable Showcase", subtitle: "How far can AI and a headless Unreal toolchain build a museum-scale experience? A public Windows build", layout: "full", img: "media/lab/fable/hub-flythrough.mp4", bullets: [] },
+      { title: "Inside the Fable Showcase", subtitle: "Gallery, terrain and weather, the cinematics alley, a native render comparison", layout: "grid", images: ["media/lab/fable/gallery-return.jpg", "media/lab/fable/terrain-rain-shore.jpg", "media/lab/fable/r2-02-cinematics-alley.jpg", "media/lab/fable/r2-07-native-render-comparison.jpg"], bullets: [] },
+      { title: "Built inside Agile Lens", subtitle: "Internal tools that ship our Vision Pro work",
+        layout: "big",
+        bigText: "Four more,\nbehind the scenes.",
+        bigCaption: "Mission Control — a live radar for SharePlay sessions · RoomScanPro — collaborative room scanning and measurement · Co-Location Engine — real and virtual players sharing one room · AgileLensMultiplayer — the SharePlay engine under every Agile Lens multiplayer app",
+        bullets: [] },
+    ] },
+
+  { year: "OSS", accent: "purple",
+    lesson: { title: "Open source.\nTake it, it’s yours.",
+      short: "OPEN SOURCE",
+      tagline: "Everything on these slides is public on GitHub right now. Unreal utilities, Godot on Vision Pro, Claude Code tooling, and some games.<br><br>github.com/ibrews",
+      tags: "Unreal · Godot · visionOS · Claude Code · Games" },
+    cases: [
+      { title: "Unreal Custodian", subtitle: "Reclaim the build caches your Unreal projects quietly hoard",
+        img: "media/lab/custodian/card-left.jpg",
+        bullets: ["Standalone Mac and Windows app, or the same thing from the terminal",
+                  "Disk pressure is the trigger, age is the ranking",
+                  "Freshness measured twice, because mtimes lie",
+                  "Trash and Recycle Bin by default — clean is a dry run unless you pass --apply",
+                  "The most-starred thing I have shipped — github.com/ibrews/unreal-custodian"] },
+      { title: "Unreal, the plumbing", subtitle: "TestFlight in one command, a macOS 26 crash fix, template content out of git, Anti-Pasta", layout: "grid", images: ["media/lab/oss/ue5-testflight.jpg", "media/lab/oss/unreal-mac-getstats-fix.jpg", "media/lab/oss/ue-reseed.jpg", "media/lab/oss/blueprint-auto-layout.jpg"], bullets: [] },
+      { title: "Godot, on Vision Pro", subtitle: "MetaHumans and a CC0 digital human in stock Godot, plus the visionOS toolchain", layout: "grid", images: ["media/lab/oss/MetaHumanGodot.jpg", "media/lab/oss/VitruvianGodot.jpg", "media/lab/oss/godot-avp-cascade.jpg", "media/lab/oss/godot-visionos-simulator-kit.jpg"], bullets: [] },
+      { title: "Spatial experiments", subtitle: "Gaussian splats on Vision Pro, spatial theater, a venue in your pocket, a living fractal", layout: "grid", images: ["media/lab/oss/SplatStage.jpg", "media/lab/oss/Understudy.jpg", "media/lab/oss/holodeck-pocket.jpg", "media/lab/oss/mandelbulb-xr.jpg"], bullets: [] },
+      { title: "Tools for working with Claude Code", subtitle: "Fleets, usage audits, Apple platform skills, GitHub plumbing", layout: "grid", images: ["media/lab/oss/claude-fleet.jpg", "media/lab/oss/claude-usage-audit.jpg", "media/lab/oss/apple-platform-skills.jpg", "media/lab/oss/gh-social-upload.jpg"], bullets: [] },
+      { title: "Small sharp utilities", subtitle: "GitHub wikis from the terminal, lost screen recordings, Xcode GPU captures", layout: "grid", images: ["media/lab/oss/gh-wiki-init.jpg", "media/lab/oss/found-footage.jpg", "media/lab/oss/gputrace.jpg"], bullets: [] },
+      { title: "And some games", subtitle: "Swing City, Crystal Caper, Tank Commander, Neon Serpent, BurgerBandit, Spellrot", layout: "grid", images: ["media/lab/oss/swing-city.jpg", "media/lab/oss/crystal-caper.jpg", "media/lab/oss/TankCommanderVR.jpg", "media/lab/oss/NeonSerpent.jpg", "media/lab/oss/BurgerBandit.jpg", "media/lab/oss/spellrot-ue.jpg"], bullets: [] },
     ] },
 
   { year: "APPX", accent: "rose",
@@ -676,6 +840,7 @@ body[data-bg-style="extreme"] .bg-overlay--extreme{display:block}
 .grid-cell{position:relative;overflow:hidden;border-radius:12px;background:#0b0d16}
 .grid-cell img,.grid-cell video{width:100%;height:100%;object-fit:contain;display:block}
 .grid-cover .grid-cell img,.grid-cover .grid-cell video{object-fit:cover}
+.case-slide:not(.grid-cover) .grid-stage{padding-bottom:clamp(96px,13vh,150px)}
 .grid-overlay{position:absolute;left:0;right:0;bottom:0;z-index:5;pointer-events:none;
   padding:clamp(20px,2.8vw,46px) clamp(26px,3.8vw,62px);
   background:linear-gradient(to top,rgba(6,8,16,.95),rgba(6,8,16,.5) 62%,transparent)}
@@ -924,7 +1089,7 @@ SECTIONS.forEach((sec,si)=>{
     // layout: 'full' — full-bleed image, video or iframe with an optional caption overlay
     if(c.layout==='full'&&c.img){
       const src=c.img;let media;
-      if(src.indexOf('IFRAME:')===0){media=`<iframe class="full-media" src="${src.slice(7)}" frameborder="0" allow="autoplay" scrolling="no"></iframe>`;}
+      if(src.indexOf('IFRAME:')===0){const u=src.slice(7);media=/^https?:/i.test(u)?`<iframe class="full-media yt-lazy" data-src="${u}" frameborder="0" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:`<iframe class="full-media" src="${u}" frameborder="0" allow="autoplay" scrolling="no"></iframe>`;}
       else if(/\.(mp4|webm)$/i.test(src)){media=`<video class="full-media" src="${src}" autoplay loop muted playsinline></video>`;}
       else {media=`<img class="full-media" src="${src}" loading="lazy">`;}
       const ov=(c.title||c.subtitle)?`<div class="full-overlay">${c.title?`<h2>${c.title}</h2>`:''}${c.subtitle?`<div class="full-sub">${c.subtitle}</div>`:''}</div>`:'';
@@ -1029,6 +1194,8 @@ SECTIONS.forEach((sec,si)=>{
     if(c.img&&c.img.startsWith('IFRAME:')){
       const iframeSrc=c.img.slice(7);
       imgHTML=`<iframe src="${iframeSrc}" style="width:100%;height:100%;border:none;border-radius:18px" allow="autoplay;fullscreen;xr-spatial-tracking" allowfullscreen></iframe>`;
+    } else if(c.img&&/\.(mp4|webm)$/i.test(c.img)){
+      imgHTML=`<video src="${c.img}" autoplay loop muted playsinline style="width:100%;border-radius:18px"></video>`;
     } else if(c.img&&c.img!=='MEDIA_CYCLER'){
       imgHTML=`<img src="${c.img}" loading="lazy" style="border-radius:18px">`;
     } else {
@@ -1165,7 +1332,7 @@ function goPrev(){goTo(nextVisible(current,-1),false);}
 function advanceStep(){const ss=slideSteps.get(allSlides[current]);if(ss&&ss.current<ss.steps.length){ss.steps[ss.current]();ss.current++;updateStepIndicator();return true;}return false;}
 function updateStepIndicator(){const el=document.getElementById('step-indicator');const ss=slideSteps.get(allSlides[current]);el.textContent=(ss&&ss.current<ss.steps.length)?`Step ${ss.current+1}/${ss.steps.length}`:'';}
 function updateHUD(){document.getElementById('counter').textContent=`${String(current).padStart(2,'0')} / ${String(total-1).padStart(2,'0')}`;updateStepIndicator();buildGrid();}
-function _primeSlideMedia(n){const cur=allSlides[n];if(cur)cur.querySelectorAll('video').forEach(v=>{v.preload='auto';try{v.load();}catch(_){}});[n-1,n+1].forEach(ni=>{if(ni<0||ni>=allSlides.length)return;const ns=allSlides[ni];if(ns)ns.querySelectorAll('video').forEach(v=>{if(v.preload==='none'){v.preload='metadata';try{v.load();}catch(_){}}});});}
+function _primeSlideMedia(n){allSlides.forEach((sl,i)=>sl.querySelectorAll('iframe.yt-lazy').forEach(f=>{const near=Math.abs(i-n)<=1;if(near&&!f.getAttribute('src'))f.src=f.dataset.src;else if(!near&&f.getAttribute('src'))f.removeAttribute('src');}));const cur=allSlides[n];if(cur)cur.querySelectorAll('video').forEach(v=>{v.preload='auto';try{v.load();}catch(_){}});[n-1,n+1].forEach(ni=>{if(ni<0||ni>=allSlides.length)return;const ns=allSlides[ni];if(ns)ns.querySelectorAll('video').forEach(v=>{if(v.preload==='none'){v.preload='metadata';try{v.load();}catch(_){}}});});}
 function updateHash(){if(current>0)location.hash=current;else if(location.hash)location.hash='0';}
 function goToFromHash(){const raw=location.hash.replace('#','');if(raw==='00'||raw==='0'){goTo(0);return;}const h=parseInt(raw);if(h>=0&&h<total)goTo(h);}
 document.getElementById('btn-next').addEventListener('click',()=>{if(window._arrowSubstep!==false&&advanceStep())return;goNext();});
