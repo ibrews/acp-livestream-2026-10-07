@@ -2,7 +2,7 @@
 
 The Spatial Deck for **Alex Coulombe Presents: A Big Random AMA while at his computer!** — a
 relaxed one-hour livestream on YouTube, 11:00am–12:00pm ET on October 7, 2026
-([watch the stream](https://www.youtube.com/watch?v=uYAjHLA3htU)). It is public so anyone who
+([watch the replay](https://www.youtube.com/watch?v=p6oVG1B-Uns)). It is public so anyone who
 watched can poke at every tool, trailer and clip at their own pace.
 
 **Open it:** https://ibrews.github.io/acp-livestream-2026-10-07/
